@@ -1,0 +1,80 @@
+<ng-container *ngIf="useInModal">
+  <modal-template [headerTitle]="'سبد خرید'">
+    <ng-container *ngIf="basketItems?.length">
+      <ul class="shopCartItems">
+        <li class="item flex-row" *ngFor="let item of basketItems">
+          <div class="item-img wi-20 show-for-large flex-row flex-row__allCenter">
+            <img appLazyLoad [src]="getImageUrl('products/' + item.product?.image)" alt="item.product?.name" />
+          </div>
+          <div class="wi-fit">
+            <div class="flex-row jus-between">
+              <div class="flex-col">
+                <div class="item-title">{{ item.product?.name }}</div>
+                <ul class="item-info wi-fit">
+                  <li *ngFor="let item of item.cart_option">
+                    <span>{{ item?.name }}: </span>
+                    <span>{{ item.value }}</span>
+                  </li>
+                  <li></li>
+                </ul>
+
+                <div class="counter">
+                  <div class="counter-part" (click)="updateBasketCart(item.id, item?.quantity + 1)">
+                    <img appLazyLoad src="/assets/images/icons/pluse.svg" alt="" />
+                  </div>
+                  <div class="counter-part">{{ item?.quantity }}</div>
+                  <div class="counter-part" *ngIf="item?.quantity == 1" (click)="deleteBasket(item.id)">
+                    <img appLazyLoad src="/assets/images/icons/trash.svg" alt="" />
+                  </div>
+                  <div
+                    class="counter-part"
+                    *ngIf="item?.quantity > 1"
+                    (click)="updateBasketCart(item.id, item?.quantity - 1)"
+                  >
+                    <img appLazyLoad src="/assets/images/icons/minuse.png" alt="" />
+                  </div>
+                </div>
+              </div>
+              <div class="flex-col wi-shrink jus-between al-end">
+                <div class="text-16 text-bold">
+                  {{ item.calc_price | number: "0.0-0" }} <span class="text-12 text-light">تومان</span>
+                </div>
+                <div class="postalCard" *ngIf="item.postal_card.length">
+                  <div class="postalCard-img">
+                    <img appLazyLoad [src]="getImageUrl(item.postal_card[0].pic)" alt="" />
+                  </div>
+                  <div class="postalCard-actions">
+                    <div class="action" (click)="ctrlCartPostal(item.id, item.postal_card[0])">ویرایش</div>
+                  </div>
+                </div>
+                <button
+                  *ngIf="!item.postal_card.length"
+                  class="button btn__hollow hi-40"
+                  (click)="ctrlCartPostal(item.id)"
+                >
+                  + افزودن کارت پستال
+                </button>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div
+        class="flex-row jus-between al-center"
+        style="color: #333; margin-bottom: 15px; background: #f1f1f1; padding: 20px 10px"
+      >
+        <span>جمع مبلغ نهایی</span>
+        <span class="text-16 text-bold"
+          >{{ totalPrice | number: "0.0-0" }} <span class="text-12 text-light">تومان</span></span
+        >
+      </div>
+      <div class="flex-row jus-between">
+        <button class="button btn__success wi-48" [routerLink]="['/checkout/shipping']">ثبت نهایی</button>
+        <button class="button btn__hollow wi-48" (click)="closeShopCart()">ادامه فرایند خرید</button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!basketItems?.length">
+      <p>سبد شما خالیست!</p>
+    </ng-container>
+  </modal-template>
+</ng-container>

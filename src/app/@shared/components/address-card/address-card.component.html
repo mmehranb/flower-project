@@ -1,0 +1,33 @@
+<div class="row large-up-2 small-up-1 half-gutter" [ngClass]="{ 'large-up-3': !useInForm }">
+  <div class="columns" *ngFor="let item of myAddress">
+    <div class="box columns address" [ngClass]="{ active: useInForm && form.value.address_id == item.address_id }">
+      <div class="address-head" [formGroup]="form" *ngIf="useInForm">
+        <special-input
+          [id]="item.address_id"
+          [name]="'addressId'"
+          [value]="item.address_id"
+          [defaultValue]="form.value[formCtrlName]"
+          [label]="'ارسال شود به ' + item.title"
+          (onChange)="selectAddress($event)"
+        ></special-input>
+      </div>
+      <ul class="address-info">
+        <li class="info-item">تحویل گیرنده: {{ item.firstname }} {{ item.lastname }}</li>
+        <li class="info-item">آدرس: {{ item.address_1 }}</li>
+        <li class="info-item">
+          شماره تماس: <span dir="ltr">{{ item.telephone }}</span>
+        </li>
+      </ul>
+      <div class="actions">
+        <div class="action" (click)="ctrlAddressCard(item)">ویرایش</div>
+        <div class="action" (click)="deleteAddress(item.address_id)">حذف</div>
+      </div>
+    </div>
+  </div>
+  <div class="columns" (click)="ctrlAddressCard()">
+    <div class="box address empty">
+      <i class="fas fa-plus"></i>
+      <span style="margin-right: 5px">افزودن آدرس</span>
+    </div>
+  </div>
+</div>

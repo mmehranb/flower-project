@@ -1,0 +1,16 @@
+.ngx-pagination {
+    li a, li.current {
+        height: 35px;
+        width: 35px;
+        padding: 0;
+        text-align: center;
+        display: inline-flex;
+        align-items: center;
+        outline: 0;
+        justify-content: center;
+    }
+
+    li.current {
+        background-color: #ff5d6c;
+    }
+}

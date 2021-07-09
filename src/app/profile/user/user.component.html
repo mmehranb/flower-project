@@ -1,0 +1,32 @@
+<div class="box">
+  <form *ngIf="form">
+    <div class="row">
+      <div class="columns small-12 medium-7 large-5">
+        <form-field
+          [form]="form"
+          [formCtrlName]="'firstname'"
+          [label]="'نام'"
+          [handleValidation]="formErrors.firstname"
+        >
+        </form-field>
+        <form-field
+          [form]="form"
+          [formCtrlName]="'lastname'"
+          [label]="'نام خانوادگی'"
+          [handleValidation]="formErrors.lastname"
+        >
+        </form-field>
+        <form-field
+          [form]="form"
+          [formCtrlName]="'email'"
+          [label]="'ایمیل'"
+          [handleValidation]="formErrors.email"
+        >
+        </form-field>
+      </div>
+    </div>
+    <div class="flex-row jus-end">
+      <button class="button btn__success" type="button" (click)="submit()">ثبت تغییرات</button>
+    </div>
+  </form>
+</div>

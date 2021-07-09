@@ -1,0 +1,24 @@
+<div class="stepsPlace">
+  <ul class="steps">
+    <li class="step" [routerLink]="stepNumber >= 1 ? ['/checkout/shipping'] : []" [ngClass]="{active: stepNumber >= 1}">
+      <div class="step-img">
+        <img appLazyLoad src="/assets/images/checkout/fast-delivery.svg" alt="" />
+      </div>
+    </li>
+    <li class="step" [routerLink]="stepNumber >= 2 ? ['/checkout/accessory'] : []" [ngClass]="{active: stepNumber >= 2}">
+      <div class="step-img">
+        <img appLazyLoad src="/assets/images/checkout/product.svg" alt="" />
+      </div>
+    </li>
+    <li class="step" [routerLink]="stepNumber >= 3 ? ['/checkout/payment'] : []" [ngClass]="{active: stepNumber >= 3}">
+      <div class="step-img">
+        <img appLazyLoad src="/assets/images/checkout/credit-card.svg" alt="" />
+      </div>
+    </li>
+    <li class="step" [routerLink]="stepNumber >= 4 ? ['/checkout/result'] : []" [ngClass]="{active: stepNumber >= 4}">
+      <div class="step-img">
+        <img appLazyLoad src="/assets/images/checkout/tick.svg" alt="" />
+      </div>
+    </li>
+  </ul>
+</div>

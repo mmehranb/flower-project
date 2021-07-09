@@ -1,0 +1,9 @@
+<ng-container *ngIf="isLoading">
+  <div class="loading" [@fadeInOut]>
+    <div class="loading-logo">
+      <img appLazyLoad src="/assets/images/logo/Final_Eng.png" alt="benisLogo">
+    </div>
+    <div class="loading-spinner"><div></div><div></div><div></div><div></div></div>
+  </div>
+  <div class="loaderBackDrop" [@fadeInOut]></div>
+</ng-container>

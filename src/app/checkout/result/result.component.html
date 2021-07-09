@@ -1,0 +1,54 @@
+<div *ngIf="orderDetail">
+  <ng-container *ngIf="orderDetail?.payment_status">
+    <img appLazyLoad src="/assets/images/checkout/success.png" alt="" class="mb-15" />
+    <p class="text-18 text-center mb-15">
+      سفارش شما با شناسه پرداخت {{ orderDetail?.payment_bank_refid }} موفقیت ثبت شد!
+    </p>
+    <div class="box mb-30 wi-100">
+      <h2 class="box-title">افزودن تاریخ به تقویم شخصی</h2>
+      <form [formGroup]="form">
+        <div class="row large-up-2 small-up-1">
+          <div class="columns">
+            <form-field
+              [form]="form"
+              [formCtrlName]="'name'"
+              [label]="'این روز خاص برای کیست'"
+              [handleValidation]="formErrors?.name"
+            >
+            </form-field>
+          </div>
+          <div class="columns">
+            <form-field
+              (click)="showEventItems()"
+              [readOnly]="true"
+              [form]="form"
+              [formCtrlName]="'eventid'"
+              [field]="'customInput'"
+              [fieldValueText]="selectedEvent"
+              [label]="'مناسبت'"
+              [handleValidation]="formErrors.eventid"
+            >
+            </form-field>
+          </div>
+          <div class="columns">
+            <dp-date-picker
+              [config]="datePickerConfig"
+              theme="dp-material"
+              [form]="form"
+              [formCtrlName]="'date'"
+              [handleValidation]="formErrors.date"
+            ></dp-date-picker>
+          </div>
+        </div>
+        <button class="button btn__success" type="button" (click)="submit()">ثبت تقویم</button>
+      </form>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!orderDetail?.payment_status">
+    <div class="flex-col al-center jus-center">
+      <img appLazyLoad src="/assets/images/checkout/reject.png" alt="" class="mb-15" />
+      <p class="text-18 text-center mb-20">در پرداخت سفارش شما مشکلی به وجود امده</p>
+      <a [routerLink]="['/']" class="button btn__success">بازگشت به صفحه اصلی</a>
+    </div>
+  </ng-container>
+</div>

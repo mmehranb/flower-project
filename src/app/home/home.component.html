@@ -1,0 +1,174 @@
+<div class="homeSlider">
+  <swiper class="swiper-container" fxFlex="auto" [config]="benisConfig" *ngIf="topSliderItems">
+    <ng-container></ng-container>
+    <div *ngFor="let slide of topSliderItems">
+      <a class="swiper-slide show-for-large" [href]="slide.link" style="background-image: url({{ slide.image }});"></a>
+      <a
+        class="swiper-slide hide-for-large"
+        [href]="slide.link"
+        style="background-image: url({{ slide.responsive_image }});"
+      ></a>
+    </div>
+  </swiper>
+  <div class="pagination"></div>
+</div>
+<section class="benis contern">
+  <div class="row align-middle align-justify">
+    <div class="columns">
+      <benis-intro-slide [isHomePage]="'ture'"></benis-intro-slide>
+    </div>
+  </div>
+</section>
+<section class="delivery">
+  <h2 class="sectionTitle has-bg">تحویل روز</h2>
+  <div class="row align-center">
+    <div class="columns small-12 mb-60" *ngIf="banerItems?.p3.length">
+      <div class="row">
+        <div class="columns large-6 small-12 mb-10" *ngFor="let item of banerItems.p3">
+          <a [href]="item.link">
+            <img appLazyLoad [src]="item.image" alt="" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="columns large-10">
+      <div class="box box__morePadding flex-row jus-between">
+        <div class="timer flex-col wi-shrink flex-col__allCenter">
+          <h3 class="timer-title">زمان باقی‌مانده برای ثبت سفارش</h3>
+          <div class="mb-30">
+            <countdown
+              class="whiteTheme"
+              [config]="{ stopTime: timeStampToEndLeague, template: '$!s!:$!m!:$!h!' }"
+            ></countdown>
+            <div class="timeTitles">
+              <span>ثانیه</span>
+              <span>دقیقه</span>
+              <span>ساعت</span>
+            </div>
+          </div>
+          <a class="button btn__success wide" [routerLink]="['/products']" [queryParams]="{ is_fastsending: 'true' }"
+            >مشاهده همه</a
+          >
+        </div>
+        <ng-container *ngIf="deviceWidth < 1024 && fastSendingProducts">
+          <div class="columns wi-40" *ngFor="let product of fastSendingProducts">
+            <product-cart [productInfo]="product"></product-cart>
+          </div>
+        </ng-container>
+        <div class="products flex-row" *ngIf="deviceWidth >= 1024 && fastSendingProducts">
+          <swiper class="swiper-container" style="width: 100%" fxFlex="auto" [config]="deliveryConfig">
+            <div class="swiper-slide" *ngFor="let product of fastSendingProducts">
+              <product-cart [productInfo]="product"></product-cart>
+            </div>
+          </swiper>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="selectedProduct">
+  <h2 class="sectionTitle has-bg">جدیدترین محصولات</h2>
+  <div class="row align-center mb-10">
+    <div class="columns small-12 mb-60" *ngIf="banerItems?.p4.length">
+      <div class="row">
+        <div class="columns large-6 small-12 mb-10" *ngFor="let item of banerItems.p4">
+          <a [href]="item.link">
+            <img appLazyLoad [src]="item.image" alt="" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="columns large-3 medium-5 small-6" *ngFor="let item of newestProducts">
+      <product-cart [productInfo]="item"></product-cart>
+    </div>
+  </div>
+  <div class="flex-row al-center jus-center">
+    <a class="button btn__success jus-end" [routerLink]="['/products']" [queryParams]="{ is_new: '1' }">
+      مشاهده جدیدترین محصولات
+    </a>
+  </div>
+</section>
+<section class="category">
+  <div class="row align-justify">
+    <div class="columns small-12 mb-60" *ngIf="banerItems?.p5.length">
+      <div class="row">
+        <div class="columns large-6 small-12 mb-10" *ngFor="let item of banerItems.p5">
+          <a [href]="item.link">
+            <img appLazyLoad [src]="item.image" alt="" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="columns small-12 large-5">
+      <div class="categorySlider">
+        <swiper
+          fxFlex="auto"
+          [config]="categorySliderConfig"
+          *ngIf="categorySliderItems"
+          (indexChange)="categorySlideChange($event)"
+          style="height: 100%"
+        >
+          <div class="slide" *ngFor="let item of categorySliderItems">
+            <h3 class="slide-title">{{ item.slogan }}</h3>
+            <div class="slide-desc wi-fit">
+              <p class="mb-15">
+                {{ item.abstract }}
+              </p>
+              <a
+                class="button btn__success jus-end"
+                [routerLink]="['products', item?.cleanurl]"
+                style="width: 80px; float: left"
+              >
+                مشاهده
+              </a>
+            </div>
+            <div class="slide-img wi-shrink"></div>
+          </div>
+        </swiper>
+        <div class="categoryBottom">
+          <div class="pagination-button-next">></div>
+          <div class="pagination-category"></div>
+          <div class="pagination-button-prev"><</div>
+        </div>
+        <ng-container *ngFor="let item of categorySliderItems; let i = index">
+          <div
+            class="category-graphic"
+            *ngIf="i == categoryIndex"
+            style="background-image: url({{ item.image2url }});"
+          ></div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="columns show-for-large large-6">
+      <div class="row small-up-2">
+        <div class="columns" *ngFor="let product of categoryProductItems">
+          <product-cart [productInfo]="product"></product-cart>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="banner">
+  <div class="row align-center">
+    <div class="columns small-12 mb-60" *ngIf="banerItems?.p1.length">
+      <div class="row">
+        <div class="columns large-6 small-12 mb-10" *ngFor="let item of banerItems.p1">
+          <a [href]="item.link">
+            <img appLazyLoad [src]="item.image" alt="" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="columns small-12" *ngIf="banerItems?.p2.length">
+      <h2 class="sectionTitle has-bg mb-40">مجله گل و گیاه بنیس</h2>
+      <div class="blogItems">
+        <div class="item" *ngFor="let item of banerItems.p2">
+          <a [href]="item.link">
+            <div class="item-pic" style="background-image: url({{ item.image }});"></div>
+            <h4 class="item-title">{{ item.title }}</h4>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

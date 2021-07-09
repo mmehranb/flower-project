@@ -1,0 +1,21 @@
+@import "node_modules/foundation-sites/scss/foundation";
+@include foundation-responsive-embed;
+
+.factor {
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+    }
+}
+
+.addShopCartAction {
+    @include breakpoint(medium down) {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      z-index: 200;
+    }
+}

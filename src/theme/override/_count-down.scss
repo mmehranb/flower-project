@@ -1,0 +1,20 @@
+.count-down {
+  span {
+      text-shadow: 0 0 4px rgba(10, 31, 77, 0.3);
+      font-size: 18px;
+      font-weight: bold;
+      color: #ff5d6c;
+      letter-spacing: 4px;
+      display: inline-block;
+      text-align: center;
+  }
+
+  &.whiteTheme {
+      color: #ff5d6c;
+
+      .hand {
+          text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+          color: #ff5d6c;
+      }
+  }
+}

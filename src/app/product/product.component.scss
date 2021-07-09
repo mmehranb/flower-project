@@ -1,0 +1,158 @@
+@import "node_modules/foundation-sites/scss/foundation";
+@include foundation-responsive-embed;
+
+.detail {
+  &-price {
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+  &-title {
+    .title {
+      font-size: 25px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .category {
+      font-size: 12px;
+      color: #999;
+    }
+  }
+
+  &-tags {
+    margin: 16px 0;
+    .title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #999;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    .list {
+      &-item {
+        padding: 5px 10px;
+        font-size: 12px;
+        font-weight: 300;
+        margin-left: 5px;
+        margin-bottom: 5px;
+        background: #f1f1f1;
+        color: #999;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &-actions {
+    .action {
+      cursor: pointer;
+    }
+  }
+}
+
+.addShopCartAction {
+  @include breakpoint(medium down) {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    z-index: 200;
+  }
+}
+
+.choose {
+  padding: 15px 0;
+  border-bottom: 1px solid #e1e1e1;
+
+  .choose-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .choose-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    li {
+      background: white;
+      height: 35px;
+      padding: 0 10px;
+      margin-left: 6px;
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      color: #42b153;
+      cursor: pointer;
+
+      .img {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 1px solid #d1d1d1;
+      }
+
+      &.active {
+        border: 1px solid #42b153;
+      }
+
+      &.disable {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+    border: 0;
+  }
+}
+
+.divider {
+  border-right: 1px solid #e1e1e1;
+  height: 100%;
+}
+
+::ng-deep .productSliderBullet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  .swiper-pagination-bullet {
+    border-radius: 5px;
+    width: 30px;
+    height: 5px;
+    margin: 0 2px;
+    outline: 0;
+
+    &.swiper-pagination-bullet-active {
+      background-color: #42b153;
+    }
+  }
+}
+
+.productDescription {
+  ::ng-deep ul {
+    list-style-type: disc;
+    margin-right: 15px;
+  }
+}
+
+.tabDetail {
+  ::ng-deep table {
+    width: 100% !important;
+  }
+}
+
+.comment {
+  padding: 15px 0;
+  border-bottom: 1px solid #e1e1e1;
+}

@@ -1,0 +1,109 @@
+@import "node_modules/foundation-sites/scss/foundation";
+@include foundation-responsive-embed;
+
+.auth {
+  display: flex;
+  height: 100vh;
+  position: relative;
+
+  &-header {
+    position: absolute;
+    width: 100px;
+    right: calc(50% + min(calc(100vw * 90 / 1920), 90px));
+    top: 60px;
+  }
+
+  &-form {
+    flex: 0 0 50%;
+    background: white;
+    padding: 0 min(calc(100vw * 90 / 1920), 90px);
+    padding-right: 0;
+    display: flex;
+    align-items: center;
+
+    .wrapper {
+      width: 100%;
+      max-width: min(400px, 60%);
+      margin-right: auto;
+    }
+
+    .formBack {
+      background: url(/assets/images/auth/right-back.png) no-repeat right bottom;
+      background-size: min(100%, 286px) auto;
+      height: 100%;
+    }
+  }
+
+  &-content {
+    flex: 0 0 50%;
+    padding: 100px min(calc(100vw * 90 / 1920), 90px);
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    background: #f6f6f8;
+
+    .wrapper {
+      width: 100%;
+      margin-left: auto;
+      max-width: min(400px, 60%);
+    }
+
+    .contentBack {
+      background: url(/assets/images/auth/long-back.png) no-repeat left top;
+      background-size: contain;
+      height: 100%;
+    }
+  }
+}
+
+@include breakpoint(medium down) {
+  .auth {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    position: relative;
+
+    &-header {
+      position: static;
+      width: 100%;
+      right: unset;
+      top: unset;
+      padding: 20px 15px 0;
+      text-align: center;
+
+      img {
+        width: 70px;
+        height: auto;
+      }
+    }
+
+    &-form {
+      flex: 0 0 auto;
+      padding: 30px 20px;
+
+      .wrapper {
+        width: 100%;
+        margin: 0 auto;
+        max-width: 400px;
+      }
+
+      .formBack {
+        flex: 0 0 0;
+      }
+    }
+
+    &-content {
+      flex: 0 0 auto;
+      padding: max(30px, 6vh) 20px;
+      .wrapper {
+        width: 100%;
+        margin: 0 auto;
+        max-width: 400px;
+      }
+
+      .contentBack {
+        flex: 0 0 0;
+      }
+    }
+  }
+}

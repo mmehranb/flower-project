@@ -1,0 +1,32 @@
+{
+  "generator-ngx-rocket": {
+    "version": "8.1.0",
+    "props": {
+      "location": "path",
+      "strict": false,
+      "skipInstall": false,
+      "skipQuickstart": false,
+      "initGit": true,
+      "usePrefix": true,
+      "appName": "Benis Flower",
+      "target": [
+        "web"
+      ],
+      "pwa": true,
+      "ui": "bootstrap",
+      "auth": true,
+      "lazy": true,
+      "angulartics": false,
+      "languages": [
+        "en-US"
+      ],
+      "tools": [],
+      "utility": [],
+      "deploy": "none",
+      "projectName": "benis-flower",
+      "packageManager": "npm",
+      "mobile": [],
+      "desktop": []
+    }
+  }
+}

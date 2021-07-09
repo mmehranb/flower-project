@@ -1,0 +1,21 @@
+<div class="template {{dialogClass}}">
+  <div class="template-head">
+    <p class="head-title">
+      {{headerTitle}}
+    </p>
+    <button class="closeButton" *ngIf="!isCentralDialog" (click)="closeModal()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="template-content" dir="ltr">
+    <div dir="rtl">
+      <p *ngIf="dialogDesc" class="content-desc">{{ dialogDesc }}</p>
+      <ng-content></ng-content>
+    </div>
+  </div>
+  <div class="template-close" *ngIf="isCentralDialog">
+    <button class="closeButton" (click)="closeModal()">
+      <img appLazyLoad src="assets/images/icons/modal-close.svg" />
+    </button>
+  </div>
+</div>

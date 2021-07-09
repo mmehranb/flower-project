@@ -1,0 +1,38 @@
+.row {
+    &.small-gutter {
+        margin-right: - map_get($grid-column-gutter, "small")/2;
+        margin-left: - map_get($grid-column-gutter, "small")/2;
+
+        & > .column,
+        & > .columns {
+            padding-left: map_get($grid-column-gutter, "small")/2;
+            padding-right: map_get($grid-column-gutter, "small")/2;
+        }
+    }
+
+    &.half-gutter {
+        margin-right: - map_get($grid-column-gutter, "small")/4;
+        margin-left: - map_get($grid-column-gutter, "small")/4;
+
+        & > .column,
+        & > .columns {
+            padding-left: map_get($grid-column-gutter, "small")/4;
+            padding-right: map_get($grid-column-gutter, "small")/4;
+        }
+    }
+
+    &.quarter-gutter {
+        margin-right: - map_get($grid-column-gutter, "small")/8;
+        margin-left: - map_get($grid-column-gutter, "small")/8;
+
+        & > .column,
+        & > .columns {
+            padding-left: map_get($grid-column-gutter, "small")/8;
+            padding-right: map_get($grid-column-gutter, "small")/8;
+        }
+    }
+
+    .columns {
+        position: relative;
+    }
+}

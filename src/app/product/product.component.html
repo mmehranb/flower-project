@@ -1,0 +1,202 @@
+<section class="container" *ngIf="productInfo">
+  <div class="row">
+    <div class="columns small-12 small-order-2 large-order-1 large-6">
+      <div class="flex-row jus-between mb-30 al-center">
+        <div class="detail-title wi-fit">
+          <h1 class="title">
+            {{ productInfo?.name }}
+          </h1>
+          <div class="category">
+            <a [routerLink]="['/']">خانه</a>
+            <a [routerLink]="['/products']"> / محصولات</a>
+            <a *ngFor="let item of productInfo.categories" [routerLink]="['/products/' + item?.cleanurl]">
+              / {{ item?.name }}</a
+            >
+          </div>
+        </div>
+        <div class="detail-actions wi-shrink">
+          <button class="action" style="outline: 0; margin-left: 5px" (click)="share(linkInput)">
+            <input type="text" #linkInput style="opacity: 0; position: fixed; z-index: -1" />
+            <i class="fas fa-share-alt fa-2x" style="color: #ff5d6c"></i>
+          </button>
+          <button
+            class="action"
+            style="outline: 0"
+            (click)="ctrlItemInWishList(productInfo?.product_id, productInfo.is_whishlist)"
+          >
+            <i class="fontIcon far fa-heart fa-2x" style="color: #ff5d6c" *ngIf="!productInfo.is_whishlist"></i>
+            <i
+              class="fontIcon fas fa-heart fa-2x"
+              style="color: #ff5d6c"
+              [ngClass]="{ active: productInfo.is_whishlist }"
+              *ngIf="productInfo.is_whishlist"
+            ></i>
+          </button>
+        </div>
+      </div>
+      <div class="box box__gray" *ngIf="productInfo.options.length">
+        <div class="choose" *ngFor="let option of productInfo.options">
+          <h4 class="choose-title">
+            {{ option.option_description?.name }}
+          </h4>
+          <ul class="choose-list">
+            <li
+              *ngFor="let value of option.values"
+              [ngClass]="{ active: value.is_default || value.isSelect, disable: !value?.quantity }"
+              (click)="
+                value?.quantity
+                  ? calculateNewPrice(
+                      productInfo?.product_id,
+                      value.product_option_value_id,
+                      option.option_id,
+                      value.option_images
+                    )
+                  : ''
+              "
+            >
+              <ng-container *ngIf="value.value_description.colorcode">
+                <div class="img" [style.background-color]="value.value_description.colorcode"></div>
+              </ng-container>
+              <ng-container *ngIf="!value.value_description.colorcode && value.value_description.imageurl">
+                <img appLazyLoad [src]="value.value_description.imageurl" alt="option" />
+              </ng-container>
+              <ng-container *ngIf="!value.value_description.colorcode && !value.value_description.imageurl">
+                {{ value.value_description?.name }}
+              </ng-container>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="box box__gray addShopCartAction">
+        <div class="flex-row al-center jus-between">
+          <div class="flex-row jus-end">
+            <button class="button btn__success" (click)="addItemToBasket(productInfo)" *ngIf="productInfo?.quantity">
+              افزودن به سبد خرید
+            </button>
+            <button
+              class="button btn__success"
+              *ngIf="!productInfo?.quantity && !productInfo.is_noticeable"
+              (click)="ctrlItemNotification(productInfo?.product_id, productInfo.is_noticeable)"
+            >
+              موجود شد به من اطلاع بده
+            </button>
+            <button
+              class="button btn__delete"
+              *ngIf="!productInfo?.quantity && productInfo.is_noticeable"
+              (click)="ctrlItemNotification(productInfo?.product_id, productInfo.is_noticeable)"
+            >
+              حذف اطلاع رسانی
+            </button>
+          </div>
+          <div class="detail-price" *ngIf="productInfo?.quantity">
+            {{ productInfo.calc_price | number: "0.0-0" }} <span class="text-12">تومان</span>
+          </div>
+          <div class="detail-price" *ngIf="!productInfo?.quantity">ناموجود!</div>
+        </div>
+      </div>
+      <div
+        class="text-12 productDescription"
+        style="margin-top: 15px"
+        [innerHTML]="productInfo.abstract | safeHtml"
+      ></div>
+    </div>
+    <div class="columns shrink large-order-1 show-for-large">
+      <div class="divider"></div>
+    </div>
+    <div class="columns small-order-1 large-order-2">
+      <swiper class="swiper-container" *ngIf="this.productInfo.images.length" fxFlex="auto" [config]="galleryConfig">
+        <div *ngFor="let slide of productInfo.images" class="swiper-slide">
+          <img [src]="getImageUrl(slide.image)" [alt]="slide.title" />
+        </div>
+      </swiper>
+      <div class="productSliderBullet"></div>
+    </div>
+    <div class="columns small-12 small-order-3 tabDetail">
+      <share-tab [items]="tabItems" (changeActivation)="activeTab = $event.id">
+        <div
+          class="box box__gray text-14"
+          *ngIf="activeTab == 1"
+          [innerHTML]="productInfo.description + productInfo.shipment_tab | safeHtml"
+        ></div>
+        <div class="box box__gray text-14" *ngIf="activeTab == 2">
+          <h2 class="text-16 mb-20">نگهداری از {{ productInfo?.name }}</h2>
+          <table border="1" cellpadding="1" cellspacing="1" class="hide-for-large mb-10">
+            <tbody>
+              <tr *ngFor="let attr of productInfo.attributes">
+                <td><img alt="" [src]="attr.imageurl" />&nbsp;{{ attr?.name }}</td>
+                <td>{{ attr.text }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table border="1" cellpadding="1" cellspacing="1" class="show-for-large mb-10">
+            <thead>
+              <tr>
+                <th *ngFor="let attr of productInfo.attributes">
+                  <img alt="" [src]="attr.imageurl" />&nbsp;{{ attr?.name }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td *ngFor="let attr of productInfo.attributes">{{ attr.text }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div [innerHTML]="productInfo.maintenance | safeHtml"></div>
+        </div>
+        <div class="box text-14" *ngIf="activeTab == 3">
+          <ng-container *ngIf="form.contains('text')">
+            <form-field [form]="form" [field]="'textarea'" [formCtrlName]="'text'" [label]="'نظر خود را بنویسید...'">
+            </form-field>
+            <button class="button btn__success" (click)="addComment(productInfo?.product_id)">ثبت نظر</button>
+          </ng-container>
+          <ul>
+            <li class="comment" *ngFor="let item of productInfo.review">
+              <div class="flex-row al-center mb-10">
+                <i class="far fa-user-circle fa-2x" style="margin-left: 5px"></i>
+                {{ item.author }}
+              </div>
+              <P [innerHTML]="item.text | safeHtml"></P>
+            </li>
+          </ul>
+          <ng-container *ngIf="!form.contains('text')">
+            <div class="box box__warning">
+              <p class="text-14 flex-row al-center jus-center">
+                <span> برای ثبت نظر ابتدا باید وارد سایت شوید </span>
+                <a class="button btn__success" (click)="login()">ورود</a>
+              </p>
+            </div>
+          </ng-container>
+        </div>
+      </share-tab>
+    </div>
+  </div>
+  <div class="row">
+    <div class="columns small-12 card detail-tags">
+      <h3 class="card-head">تگ های محصول</h3>
+      <ul class="list flex-row wrapped">
+        <li class="list-item" *ngFor="let tag of productInfo.tags">
+          <a [routerLink]="['/products/tag' + '/' + tag.id + '/' + tag?.name]" routerLinkActive="router-link-active">
+            {{ tag?.name }}
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="card columns small-12" *ngIf="productInfo.relateds.length">
+      <p class="card-head">محصولات مشابه</p>
+      <swiper class="swiper-container" fxFlex="auto" [config]="relatedProductConfig">
+        <div class="swiper-slide" *ngFor="let item of productInfo.relateds">
+          <product-cart [productInfo]="item"></product-cart>
+        </div>
+      </swiper>
+    </div>
+    <div class="card columns small-12" *ngIf="lastSeenItems?.length">
+      <p class="card-head">بازدید های اخیر</p>
+      <swiper class="swiper-container" fxFlex="auto" [config]="relatedProductConfig">
+        <div class="swiper-slide" *ngFor="let item of lastSeenItems">
+          <product-cart [productInfo]="item"></product-cart>
+        </div>
+      </swiper>
+    </div>
+  </div>
+</section>

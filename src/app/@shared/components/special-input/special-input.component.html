@@ -1,0 +1,15 @@
+<div class="flex-row input">
+  <input
+    class="input-input"
+    type="radio"
+    [id]="id"
+    (change)="emitOnChange($event)"
+    [name]="name"
+    [value]="value"
+    [checked]="defaultValue == value"
+    hidden
+  />
+  <label [for]="id" class="input-label">
+    <span>{{ label }}</span>
+  </label>
+</div>

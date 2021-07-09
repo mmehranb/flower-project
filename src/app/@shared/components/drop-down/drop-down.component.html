@@ -1,0 +1,8 @@
+<div class="displayItem">
+  <a [routerLink]="['/' + headerRoute]">{{ header }}</a>
+  <ul class="dropdown">
+    <li *ngFor="let item of items">
+      <a [routerLink]="['/' + headerRoute + '/' + item?.cleanurl]">{{ item?.name }}</a>
+    </li>
+  </ul>
+</div>

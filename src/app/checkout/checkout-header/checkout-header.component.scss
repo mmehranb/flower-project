@@ -1,0 +1,111 @@
+@import "node_modules/foundation-sites/scss/foundation";
+@include foundation-responsive-embed;
+
+.stepsPlace {
+  margin: 40px 0 80px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border-bottom: 1px solid #e5e5e5;
+  width: 100%;
+
+  .steps {
+    display: flex;
+    width: 90vw;
+    max-width: 500px;
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+
+    .step {
+      flex: 1 0 0;
+      position: relative;
+      padding: 0 20px;
+      outline: 0;
+
+      &:not(:first-child) {
+        &:before {
+          content: "";
+          position: absolute;
+          width: 28px;
+          height: 10px;
+          top: 50%;
+          left: calc(100% - 14px);
+          background: #acacac;
+          transform: translateY(-50%);
+          border-radius: 5px;
+        }
+      }
+
+      &-img {
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #acacac;
+        padding: calc(50% - 10px) 0;
+        border: 10px solid #e5e5e5;
+
+        img {
+          height: 18px;
+          width: auto;
+          position: absolute;
+          top: 50%;
+          right: 50%;
+          transform: translate(50%, -50%);
+        }
+      }
+
+      &.active {
+        cursor: pointer;
+        
+        .step-img {
+          background: #04c377;
+        }
+
+        &:before {
+          background: #04c377;
+        }
+      }
+    }
+  }
+}
+
+@include breakpoint(medium down) {
+  .stepsPlace {
+    .steps {
+      .step {
+        flex: 1 0 0;
+        position: relative;
+        padding: 0 5px;
+        
+        &:not(:first-child) {
+          &:before {
+            display: none;
+          }
+        }
+
+        &-img {
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: #acacac;
+          padding: calc(50% - 10px) 0;
+          border: 10px solid #e5e5e5;
+  
+          img {
+            height: 18px;
+            width: auto;
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            transform: translate(50%, -50%);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+<modal-template [headerTitle]="dialogData.header" [isCentralDialog]="true" [dialogDesc]="dialogData.desc">
+  <ul class="modal-list modal-list__column">
+    <li
+      class="flex-row al-center"
+      [ngClass]="{'active': item.value == dialogData.defaultValue, 'jus-start': dialogData.itemTextAlign == 'right', 'jus-center': !dialogData.itemTextAlign }"
+      *ngFor="let item of dialogData.listItems"
+      (click)="selectItem(item)"
+    >
+      <span class="title">
+        {{ item.title }}
+      </span>
+    </li>
+  </ul>
+</modal-template>

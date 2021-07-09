@@ -1,0 +1,115 @@
+@import "node_modules/foundation-sites/scss/foundation";
+@include foundation-responsive-embed;
+
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+.product {
+  text-align: center;
+  box-sizing: border-box;
+  position: relative;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 200px;
+
+  &.active {
+    border: 1px solid #42b153;
+  }
+
+  &-img {
+    border-radius: 12px 12px 0 0;
+    position: relative;
+    background: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  &-title {
+    font-size: 14px;
+    color: #777e87;
+    margin-bottom: 5px;
+  }
+
+  &-actions {
+    width: 100%;
+    display: flex;
+    bottom: 0;
+    right: 0;
+    border: 1px solid #42b153;
+    border-radius: 0 0 12px 12px;
+    height: 30px;
+    overflow: hidden;
+    margin-bottom: 15px;
+
+    .action {
+      font-size: 12px;
+      color: #42b153;
+      flex: 1 1 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &:hover {
+        background: #42b153;
+        color: white;
+      }
+
+      &:nth-child(2) {
+        border-right: 1px solid #42b153;
+        border-left: 1px solid #42b153;
+      }
+    }
+  }
+
+  @include breakpoint(large) {
+    &:hover {
+      box-shadow: inset 0px 0px 5px 0 rgba(34, 34, 34, 0.2);
+      background: white;
+      border-radius: 10px;
+    }
+  }
+  @include breakpoint(medium down) {
+    box-shadow: unset;
+    border-radius: 0;
+    border: 1px solid #e1e1e1;
+
+    &:not(:first-child) {
+      margin-right: -1px;
+    }
+
+    .product-actions {
+      .action {
+        background: #42b153;
+        color: white;
+      }
+    }
+  }
+}
+
+.suggestion {
+  .item {
+    background: #F5F5F5;
+    font-size: 14px;
+    padding: 10px;
+    margin-bottom: 5px;
+
+    &-title {
+      margin-bottom: 0px;
+      cursor: pointer;
+    }
+
+    .child {
+      padding: 5px 0;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #CCCCCC;
+      }
+    }
+  }
+}

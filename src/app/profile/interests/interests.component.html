@@ -1,0 +1,10 @@
+<div class="box">
+    <div class="row large-up-5 small-up-2 half-gutter">
+        <p class="text-center" *ngIf="!interestsList">
+            محصولی برای علاقمندی ها وجود ندارد
+        </p>
+        <div class="columns" *ngFor="let item of interestsList">
+            <product-cart [productInfo]="item" (onWishChange)="getInterestsList()"></product-cart>
+        </div>
+    </div>
+</div>

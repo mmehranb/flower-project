@@ -1,0 +1,101 @@
+<footer *ngIf="!router.url.startsWith('/checkout') && !router.url.startsWith('/profile')">
+  <div class="footer">
+    <div class="row align-center">
+      <div class="columns large-4 small-12 small-order-3 large-order-1 mb-20">
+        <div class="row">
+          <div class="columns small-12 large-order-1 small-order-2">
+            <div class="jus-center al-center">
+              <div class="footer-logo">
+                <img appLazyLoad src="assets/images/logo/benis-logo.png" alt="گلفروشی آنلاین بنیس فلاور" />
+              </div>
+              <div class="hide-for-large">
+                <a
+                  referrerpolicy="origin"
+                  target="_blank"
+                  href="https://trustseal.enamad.ir/?id=148324&amp;Code=R4iTUNxrMovTXbvgFfvH"
+                  ><img
+                    appLazyLoad
+                    referrerpolicy="origin"
+                    src="https://Trustseal.eNamad.ir/logo.aspx?id=148324&amp;Code=R4iTUNxrMovTXbvgFfvH"
+                    alt=""
+                    width="100px"
+                    style="cursor: pointer"
+                    id="R4iTUNxrMovTXbvgFfvH"
+                /></a>
+              </div>
+            </div>
+          </div>
+          <div class="columns small-12 large-order-2 small-order-1">
+            <p class="footer-text text-justify" style="text-align-last: center">
+              بنیس فلاور، مجموعه‌ای است شامل گلخانه‌های گل رز، گل فروشی حضوری و گل فروشی آنلاین 24 ساعته که ارائه کننده
+              انواع باکس گل، دسته گل، گل‌های جاودان، گیاهان آپارتمانی و... می‌باشد. خرید آنلاین گل از سایت گل فروشی بنیس
+              فلاور، محدود به زمان و مکان نیست و خدمات با بالاترین سطح انجام می‌شود. در ارائه گل و گلدان‌های بنیس، از
+              زیباترین و تازه‌ترین گیاهان استفاده خواهیم کرد تا آنها همچون سفیری شایسته، عشق و احترام شما را به
+              عزیزان‌تان برسانند.
+            </p>
+          </div>
+          <div class="column small-12 small-order-3">
+            <div class="flex-row jus-center al-center">
+              <a class="social" href="https://www.instagram.com/benisflower">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a class="social" href="https://facebook.com/benisflower">
+                <i class="fab fa-facebook"></i>
+              </a>
+              <a class="social" href="https://www.linkedin.com/company/benisflower/?viewAsMember=true">
+                <i class="fab fa-linkedin"></i>
+              </a>
+              <a class="social" href="https://pintrest.com/benisflower">
+                <i class="fab fa-pinterest"></i>
+              </a>
+              <a class="social" href="https://twitter.com/benisflower">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a class="social" href="https://api.whatsapp.com/send/?phone=989046600264&text&app_absent=0">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="columns large-4 small-12 small-order-2 mb-20">
+        <div class="al-center" style="height: 100%">
+          <ul class="list">
+            <li *ngFor="let item of footerMenus">
+              <a [href]="item?.cleanurl">
+                {{ item?.name }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="columns large-4 small-12 small-order-1 large-order-3 mb-20">
+        <div class="jus-center al-center flex-col" style="height: 100%">
+          <div class="show-for-large">
+            <a
+              referrerpolicy="origin"
+              target="_blank"
+              href="https://trustseal.enamad.ir/?id=148324&amp;Code=R4iTUNxrMovTXbvgFfvH"
+              ><img
+                appLazyLoad
+                referrerpolicy="origin"
+                src="https://Trustseal.eNamad.ir/logo.aspx?id=148324&amp;Code=R4iTUNxrMovTXbvgFfvH"
+                alt=""
+                style="cursor: pointer"
+                id="R4iTUNxrMovTXbvgFfvH"
+            /></a>
+          </div>
+          <div class="al-center flex-col">
+            <p class="footer-text text-center mb-15">
+              {{ config?.addressfa }}
+            </p>
+            <a class="footer-text text-center" href="tel:{{ config?.tell }}">
+              {{ config?.tell }}
+            </a>
+            <a class="footer-text text-center" href="mailto:{{ config?.email }}">{{ config?.email }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

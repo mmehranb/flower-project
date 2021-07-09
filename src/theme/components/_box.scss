@@ -1,0 +1,33 @@
+@import "node_modules/foundation-sites/scss/foundation";
+@include foundation-responsive-embed;
+
+.box {
+    padding: 15px;
+    border-radius: 4px;
+    background-color: #ffffff;
+
+    &__gray {
+        background: #f5f5f5;
+    }
+
+    &__warning {
+        background: #FFFDE4;
+        border: 1px solid #F6E8A1;
+    }
+
+    &__morePadding {
+        padding: 30px;
+    }
+
+    &-title {
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+}
+
+@include breakpoint(medium down) {
+    .box {
+        padding: 15px !important;
+    }
+}

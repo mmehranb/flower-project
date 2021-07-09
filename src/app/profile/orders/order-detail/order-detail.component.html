@@ -1,0 +1,98 @@
+<ul class="orderSteps">
+  <li class="step" [ngClass]="{ active: orderDetail?.order_status_id == 1000 }">
+    <div class="step-img">
+      <img appLazyLoad src="/assets/images/order/accept-order.png" alt="" />
+    </div>
+    <div class="step-title">تائید سفارش</div>
+  </li>
+  <li class="line" [ngClass]="{ active: orderDetail?.order_status_id == 1000 }">
+    <img src="/assets/images/order/line.png" alt="" />
+  </li>
+  <li class="step" [ngClass]="{ active: orderDetail?.order_status_id == 14 }">
+    <div class="step-img">
+      <img appLazyLoad src="/assets/images/order/heavy_box.svg" alt="" />
+    </div>
+    <div class="step-title">آماده‌سازی سفارش</div>
+  </li>
+  <li class="line" [ngClass]="{ active: orderDetail?.order_status_id == 14 }">
+    <img src="/assets/images/order/line.png" alt="" />
+  </li>
+  <li class="step" [ngClass]="{ active: orderDetail?.order_status_id == 8 }">
+    <div class="step-img">
+      <img appLazyLoad src="/assets/images/order/drone_delivery.svg" alt="" />
+    </div>
+    <div class="step-title">ارسال سفارش</div>
+  </li>
+  <li class="line" [ngClass]="{ active: orderDetail?.order_status_id == 8 }">
+    <img src="/assets/images/order/line.png" alt="" />
+  </li>
+  <li class="step" [ngClass]="{ active: orderDetail?.order_status_id == 1001 }">
+    <div class="step-img">
+      <img appLazyLoad src="/assets/images/order/deliveries.svg" alt="" />
+    </div>
+    <div class="step-title">تحویل به گیرنده</div>
+  </li>
+</ul>
+<div class="box detail mb-30">
+  <ul *ngIf="orderDetail">
+    <li>
+      <div class="title">نام و نام خانوادگی تحویل‌گیرنده</div>
+      <div class="ans">{{ orderDetail?.shipping_firstname }} {{ orderDetail?.shipping_lastname }}</div>
+    </li>
+    <li>
+      <div class="title">شماره تلفن تحویل‌گیرنده</div>
+      <div class="ans">{{ orderDetail?.shipping_telephone }}</div>
+    </li>
+    <li>
+      <div class="title">تاریخ ثبت سفارش</div>
+      <div class="ans">{{ orderDetail?.insert_date_fr }}</div>
+    </li>
+    <li>
+      <div class="title">آدرس تحویل‌گیرنده</div>
+      <div class="ans">{{ orderDetail?.shipping_address_1 }}</div>
+    </li>
+    <li>
+      <div class="title">تاریخ تحویل سفارش</div>
+      <div class="ans">{{ orderDetail?.shipping_date_fr }}</div>
+    </li>
+    <li>
+      <div class="title">بازه زمانی تحویل سفارش</div>
+      <div class="ans">{{ orderDetail?.shipping_time_text }}</div>
+    </li>
+  </ul>
+</div>
+<div class="row align-center">
+  <div class="columns large-8 small-12">
+    <div class="row large-up-3 small-up-2 half-gutter">
+      <div class="columns mb-30" *ngFor="let item of orderDetail?.order_products">
+        <product-cart [productInfo]="item"></product-cart>
+      </div>
+    </div>
+  </div>
+  <div class="columns large-4 small-12">
+    <div class="box">
+      <ul class="factor mb-30">
+        <ng-container *ngIf="orderDetail?.order_products.length">
+          <li *ngFor="let item of orderDetail?.order_products">
+            <span>{{ item?.name }}</span>
+            <span>{{ item.price | number: "0.0-0" }} <span class="text-12">تومان</span></span>
+          </li>
+          <hr />
+        </ng-container>
+        <li>
+          <span>تخفیف</span>
+          <span>{{ orderDetail?.discount | number: "0.0-0" }} <span class="text-12">تومان</span></span>
+        </li>
+        <li>
+          <span>هزینه ارسال</span>
+          <span>{{ orderDetail?.shipping_cost || 0 | number: "0.0-0" }} <span class="text-12">تومان</span></span>
+        </li>
+        <hr />
+        <li>
+          <span>جمع کل</span>
+          <span>{{ orderDetail?.total | number: "0.0-0" }} <span class="text-12">تومان</span></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

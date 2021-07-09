@@ -1,0 +1,21 @@
+{
+  "name": "Benis Flower",
+  "short_name": "Benis Flower",
+  "theme_color": "#000",
+  "background_color": "#000",
+  "scope": "https://www.benisflower.com/",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "assets/benis.png",
+      "sizes": "120x124",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/benis.png",
+      "sizes": "120x124",
+      "type": "image/png"
+    }
+  ]
+}

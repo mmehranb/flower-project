@@ -1,0 +1,13 @@
+.faq {
+    border-bottom: 1px solid #e1e1e1;
+    padding: 15px 0;
+    font-size: 14px;
+
+    &-title {
+        cursor: pointer;
+    }
+
+    &-desc {
+        margin-top: 10px;
+    }
+}

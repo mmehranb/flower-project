@@ -1,0 +1,24 @@
+//color
+$gray:              #8c8c8c;
+$success:           #009476;
+$warning:           #f7b011;
+$danger:            #e1432e;
+
+$info-l:            #1185f7;
+$info-d:            #224698;
+
+//mixins params
+$margins:           0 5 10 15 20 30 40 60;
+$fonts:             10 12 14 16 20;
+$widths:            10 15 20 30 40 48 50 60 70 80 90 100;
+$color-list:
+(
+    gray: ($gray)
+);
+
+
+//variable
+$background:#464646;
+$fontFamily:'yekan',tahoma;
+$direction:rtl;
+$bottmFixedMenuColor:#f2f2f2;

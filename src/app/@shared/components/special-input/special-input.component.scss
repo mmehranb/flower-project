@@ -1,0 +1,49 @@
+.input {
+  align-items: flex-start;
+  padding: 5px 0;
+
+  &-label {
+    position: relative;
+    padding-right: 20px;
+
+    &:after {
+      content: "";
+      width: 17px;
+      height: 17px;
+      border: solid 1px #42b153;
+      background: white;
+      box-sizing: border-box;
+      border-radius: 50%;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  &-input:checked {
+    & ~ .input-label {
+      position: relative;
+
+      &:before {
+        content: "";
+        position: absolute;
+        right: 3px;
+        top: 50%;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #42b153;
+        z-index: 1;
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  &-text {
+    color: #666;
+    font-size: 14px;
+    margin: 0 10px 0 0;
+    line-height: 20px;
+  }
+}

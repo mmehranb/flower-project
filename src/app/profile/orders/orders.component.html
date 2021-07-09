@@ -1,0 +1,26 @@
+<div class="box">
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>شماره سفارش</th>
+                <th>تاریخ ثبت سفارش</th>
+                <th>زمان تحویل سفارش</th>
+                <th>مبلغ کل</th>
+                <th>وضعیت</th>
+                <th>جزئیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of myOrders;let i = index">
+                <td>{{i + 1}}</td>
+                <td>{{item.factor_number}}</td>
+                <td>{{item.insert_date_fr_simple}}</td>
+                <td>{{item.shipping_date_fr}}</td>
+                <td>{{item.total| number:'0.0-0'}}</td>
+                <td>{{item.payment_status ? 'پرداخت شده' : 'پرداخت نشده'}}</td>
+                <td><a [routerLink]="['/profile/orders/detail/' + item.order_id]" >مشاهده></a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

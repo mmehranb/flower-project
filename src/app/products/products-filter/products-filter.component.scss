@@ -1,0 +1,16 @@
+.filter {
+  &-box {
+    .box-header {
+      color: white;
+      background-color: #42b153;
+      font-size: 14px;
+      padding: 8px 15px;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .box-inputs {
+      padding: 10px 15px;
+      background-color: #f7f7f7;
+    }
+  }
+}

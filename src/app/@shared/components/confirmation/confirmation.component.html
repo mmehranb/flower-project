@@ -1,0 +1,14 @@
+<modal-template [headerTitle]="'ذخیره تغییرات'" [isCentralDialog]="true" [dialogDesc]="dialogData.dialogDesc">
+  <div class="flex-row al-center jus-center">
+    <div class="wi-40 column">
+      <button class="button btn__success wide" (click)="confirmationAction(true)">
+        بله
+      </button>
+    </div>
+    <div class="wi-40 column">
+      <button class="button btn__delete wide" (click)="confirmationAction(false)">
+        خیر
+      </button>
+    </div>
+  </div>
+</modal-template>

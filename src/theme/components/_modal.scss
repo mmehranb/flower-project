@@ -1,0 +1,200 @@
+
+$color-overlay: rgba(255, 93, 108, 0.4);
+$dialog-position-top: 50%;
+
+@import "~ngx-smart-modal/ngx-smart-modal";
+@import "node_modules/foundation-sites/scss/foundation";
+@include foundation-responsive-embed;
+
+// Dialog modal
+.nsm-dialog {
+  position: fixed;
+  opacity: 1;
+  visibility: visible;
+  min-height: unset;
+  width: unset;
+  pointer-events: none;
+  outline: none;
+  max-width: unset;
+  box-sizing: border-box;
+  z-index: 999;
+
+  .template {
+    position: relative;
+  }
+
+  &.dialog-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% - 20px));
+
+    .template {
+      background-color: #ffffff;
+      width: calc(100vw - 40px);
+      border-radius: 24px;
+      box-shadow: 10px 10px 10px 0 rgba(255, 93, 108, 0.4);
+
+      &-content {
+        max-height: calc(90vh - 150px);
+      }
+
+      &-head {
+        justify-content: center;
+      }
+
+      &-close {
+        top: calc(100% + 20px);
+        left: 50%;
+        transform: translate(-50%, 0);
+      }
+    }
+  }
+
+  &.dialog-bottomSheet {
+    bottom: 0;
+    left: 0;
+    transform: translate(0, 100%);
+    transition: transform 300ms ease-out;
+
+    .template {
+      background-color: #2d2d2d;
+      width: 100vw;
+      border-radius: 8px 8px 0 0;
+
+      .template-head {
+        padding-bottom: 16px;
+        border-bottom: 1px solid rgba(247, 167, 0, 0.3);
+        align-content: center;
+
+        .head-title {
+          margin: 0;
+          text-align: right;
+          color: #d8d8d8;
+          font-weight: normal;
+          font-size: 14px;
+        }
+      }
+
+      .template-content .content-desc {
+        color: #d8d8d8;
+      }
+    }
+
+    &.active {
+      transform: translate(0, 0);
+    }
+
+    &.nsm-dialog-close {
+      opacity: 1;
+    }
+  }
+
+  &.dialog-side {
+    bottom: 0;
+    right: 0;
+    transform: translate(100%, 0);
+    transition: transform 250ms ease-out;
+    max-width: unset;
+    height: 100%;
+
+    .nsm-content,
+    .nsm-body {
+      height: 100%;
+    }
+
+    .template {
+      background-color: white;
+      width: 90vw;
+      max-width: 700px;
+      border-radius: 0;
+      height: 100%;
+      box-shadow: -10px 0px 10px 0 rgba(255, 93, 108, 0.4);
+
+      .template-head {
+        border-bottom: 1px solid #eee;
+        justify-content: space-between;
+
+        .head-title {
+          margin: 0;
+          text-align: right;
+          color: #d8d8d8;
+          font-weight: normal;
+          font-size: 14px;
+        }
+      }
+
+      .template-content {
+        color: #d8d8d8;
+        height: calc(100% - 85px);
+        max-height: unset;
+      }
+
+      &-close {
+        display: none;
+        top: 50%;
+        left: 0;
+        transform: translate(calc(-100% - 25px), -50%);
+      }
+    }
+
+    &.active {
+      transform: translate(0, 0);
+
+      .template .template-close{
+        display: block;
+      }
+    }
+
+    &.nsm-dialog-close {
+      opacity: 1;
+    }
+  }
+
+  &.nsm-centered {
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - (1.75rem * 2));
+  }
+
+  @include breakpoint(medium down) {
+    &.dialog-side {
+      .template {
+      }
+    }
+  }
+}
+
+.overlay {
+  &.nsm-overlay-open {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+}
+
+.nsm-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+  background-clip: padding-box;
+  background-color: unset;
+  border-radius: 0;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  box-shadow: none;
+}
+
+.fixedButton {
+  padding: 20px 0;
+
+  .button {
+    position: absolute;
+    bottom: 15px;
+    width: calc(100% - 20px);
+    right: 10px;
+  }
+}
+

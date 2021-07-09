@@ -1,0 +1,52 @@
+@mixin emergency-margin($margins) {
+    @each $i in $margins {
+        .mb-#{$i} {
+            margin-bottom: #{$i}px!important;
+        }
+    }
+}
+
+@mixin emergency-fontSize ($size) {
+    @each $i in $size {
+        .text-#{$i} {
+            font-size: #{$i}px!important;
+        }
+    }
+
+    .text-center {
+        text-align: center;
+    }
+    .text-bold {
+        font-weight: bold;
+    }
+    .text-light {
+        font-weight: normal;
+    }
+}
+
+@mixin emergency-color ($colors) {
+    @each $key in map_keys($colors) {
+        .#{$key}-c {
+            color: nth(map_get($colors, $key), 1);
+        }
+    }
+
+    .black-c {
+        color: #000 !important;
+    }
+
+    .white-c {
+        color: #fff !important;
+    }
+}
+
+@mixin flex-widths ($widths) {
+    @each $i in $widths {
+        .wi-#{$i} {
+            flex: 0 0 #{$i + '%'};
+            min-width: #{$i + '%'};
+            max-width: #{$i + '%'};
+        }
+    }
+}
+

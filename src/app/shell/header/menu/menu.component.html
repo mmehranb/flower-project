@@ -1,0 +1,125 @@
+<ng-container *ngIf="!useInModal">
+  <ul class="menu">
+    <li class="menu-item">
+      <a [routerLink]="['/']">خانه</a>
+    </li>
+    <li class="menu-item displayItem">
+      <a [routerLink]="['/products']">محصولات</a>
+      <div class="dropCategory">
+        <ul class="dropCategory-side">
+          <li *ngFor="let category of categories" (mouseenter)="currentCategory = category.id">
+            <a [routerLink]="['/products/' + category?.cleanurl]">
+              {{ category?.name }}
+            </a>
+          </li>
+        </ul>
+        <ul class="dropCategory-content">
+          <ng-container *ngFor="let category of categories">
+            <li *ngIf="currentCategory == category.id">
+              <ul class="child wi-shrink">
+                <li>
+                  <a [routerLink]="['/products/' + category?.cleanurl]"> همه {{ category?.name }} </a>
+                </li>
+                <li *ngFor="let child of category.children">
+                  <a [routerLink]="['/products/' + category?.cleanurl + '/' + child?.cleanurl]">
+                    {{ child?.name }}
+                  </a>
+                </li>
+              </ul>
+              <div class="wi-shrink">
+                <img appLazyLoad [src]="getImageUrl(category.image)" [alt]="category?.name" />
+              </div>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </li>
+    <li class="menu-item displayItem">
+      <a [routerLink]="['/']">مناسبت‌ها</a>
+      <div class="dropCategory">
+        <ul class="dropCategory-side">
+          <li *ngFor="let event of events" (mouseenter)="currentEvent = event.id">
+            <a [routerLink]="['/products/event/' + event?.cleanurl]">
+              {{ event?.name }}
+            </a>
+          </li>
+        </ul>
+        <ul class="dropCategory-content">
+          <ng-container *ngFor="let event of events">
+            <li *ngIf="currentEvent == event.id">
+              <ul class="child wi-fit">
+                <li>
+                  <a [routerLink]="['/products/event/' + event?.cleanurl]"> همه محصولات {{ event?.name }} </a>
+                </li>
+              </ul>
+              <div class="wi-shrink">
+                <img appLazyLoad [src]="getImageUrl(event.image)" [alt]="event?.name" />
+              </div>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </li>
+    <li class="menu-item" *ngFor="let menu of menus">
+      <a [href]="menu?.cleanurl">{{ menu?.name }}</a>
+    </li>
+  </ul>
+</ng-container>
+
+<ng-container *ngIf="useInModal">
+  <modal-template [headerTitle]="'بنیس'" [dialogClass]="'isMenu'">
+    <ul class="menu">
+      <li class="menu-item flex-row al-center">
+        <a [routerLink]="['/']">خانه</a>
+      </li>
+      <li class="menu-item submenu">
+        <a (click)="categorySubmenuActive = !categorySubmenuActive">
+          <i class="fas fa-plus"></i>
+          محصولات
+        </a>
+        <ul class="submenu-list" [collapse]="!categorySubmenuActive">
+          <li *ngFor="let subitem of categories">
+            <ng-container *ngIf="subitem.children">
+              <a (click)="subitem.active = !subitem.active">
+                <i class="fas fa-plus"></i>
+                {{ subitem?.name }}
+              </a>
+              <ul class="submenu-list" [collapse]="!(subitem.active || false)" *ngIf="subitem.children">
+                <li *ngFor="let child of subitem.children">
+                  <a [routerLink]="['/products/' + subitem?.name + '/' + child?.name]">{{ child?.name }}</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/products/' + subitem?.name]"> همه {{ subitem?.name }} </a>
+                </li>
+              </ul>
+            </ng-container>
+            <ng-container *ngIf="!subitem.children">
+              <a [routerLink]="['/products/' + subitem?.name]">
+                {{ subitem?.name }}
+              </a>
+            </ng-container>
+          </li>
+          <li>
+            <a [routerLink]="['/products']"> همه محصولات </a>
+          </li>
+        </ul>
+      </li>
+      <li class="menu-item submenu">
+        <a (click)="eventSubmenuActive = !eventSubmenuActive">
+          <i class="fas fa-plus"></i>
+          مناسبت‌ها
+        </a>
+        <ul class="submenu-list" [collapse]="!eventSubmenuActive">
+          <li *ngFor="let event of events">
+            <a [routerLink]="['/products/event/' + event?.cleanurl]">
+              {{ event?.name }}
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="menu-item" *ngFor="let menu of menus">
+        <a [href]="menu?.cleanurl">{{ menu?.name }}</a>
+      </li>
+    </ul>
+  </modal-template>
+</ng-container>

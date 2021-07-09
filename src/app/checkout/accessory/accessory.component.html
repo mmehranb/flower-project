@@ -1,0 +1,18 @@
+<div class="box mb-20">
+  <div class="flex-row al-center jus-between">
+    <h2 class="box-title">
+      هدیه مکمل و مناسبت
+    </h2>
+    <button class="button btn__hollow hi-40" (click)="filter()">فیلتر</button>
+  </div>
+  <ng-container *ngIf="accesoories && accesoories.length">
+    <div class="row large-up-4 small-up-2 quarter-gutter">
+      <div class="columns" *ngFor="let item of accesoories">
+        <product-cart [productInfo]="item" [onlyAddAction]="true" (onAddToBasket)="afterProductAdd()"></product-cart>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="accesoories && !accesoories.length">
+    <p>اکسسوری برای این فیلتر وجود ندارد</p>
+  </ng-container>
+</div>

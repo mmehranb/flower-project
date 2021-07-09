@@ -1,0 +1,30 @@
+<ng-container *ngIf="!action?.useInModal">
+  <div class="auth">
+    <div class="auth-header">
+      <a [routerLink]="['/']">
+        <img appLazyLoad src="assets/images/logo/farsi-logotype.png" alt="" />
+      </a>
+    </div>
+    <div class="auth-form">
+      <div class="formBack wi-fit"></div>
+      <div class="wrapper">
+        <auth-form [currentAction]="action"></auth-form>
+      </div>
+    </div>
+    <div class="auth-content">
+      <div class="wrapper">
+        <benis-intro-slide></benis-intro-slide>
+      </div>
+      <div class="contentBack wi-fit"></div>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="action?.useInModal">
+  <modal-template
+    [headerTitle]="'بنیس'"
+    [isCentralDialog]="true"
+  >
+    <auth-form [currentAction]="action"></auth-form>
+  </modal-template>
+</ng-container>
+

@@ -1,0 +1,33 @@
+.tab {
+  margin: 30px 0;
+
+  &-head {
+    display: flex;
+    border-bottom: 1px solid #e1e1e1;
+    justify-self: start;
+    margin-bottom: 25px;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    li {
+      padding: 7px 0;
+      margin-left: 20px;
+      font-size: 14px;
+      color: #777e87;
+      cursor: pointer;
+      transition: all linear 150ms;
+
+      &.active {
+        color: #42b153;
+        border-bottom: 1px solid #42b153;
+      }
+    }
+  }
+
+  ::ng-deep &-content {
+    ul {
+      list-style-type: circle;
+      margin-right: 15px;
+    }
+  }
+}

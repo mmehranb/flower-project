@@ -1,0 +1,26 @@
+<ng-container *ngIf="form">
+  <div class="flex-row checkbox {{className}}" [formGroup]="form">
+    <input [formControlName]="id" 
+      class="checkbox-input"
+      type="checkbox"
+      [id]="id"
+      (change)="emitOnChange($event)"
+      hidden
+    />
+    <label class="checkbox-label wi-shrink" [for]="id"></label>
+    <p class="checkbox-text wi-fix">{{label}}</p>
+  </div>
+</ng-container>
+<ng-container *ngIf="!form">
+  <div class="flex-row checkbox">
+    <input class="checkbox-input"
+      type="checkbox"
+      [id]="id"
+      [checked]="defaultValue"
+      (change)="emitOnChange($event)"
+      hidden
+    />
+    <label class="checkbox-label wi-shrink" [for]="id"></label>
+    <p class="checkbox-text wi-fix">{{label}}</p>
+  </div>
+</ng-container>

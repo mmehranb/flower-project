@@ -1,0 +1,82 @@
+<div
+  class="{{ fieldClass }} form-item js-{{ formCtrlName }}"
+  [formGroup]="form"
+  [ngClass]="{
+    active: handleActiveClass || inputFocus,
+    focused: inputFocus,
+    invalid: checkValidationStatus(),
+    withoutIcon: !fieldIcon
+  }"
+>
+  <ng-container [ngSwitch]="field">
+    <input
+      *ngSwitchCase="'input'"
+      autocomplete="off"
+      [type]="fieldType"
+      [id]="formCtrlName"
+      [attr.inputmode]="inputMode"
+      [formControlName]="formCtrlName"
+      (focus)="inputFocus = true && !readOnly"
+      (focusout)="inputFocus = false"
+      (click)="emitOnClick($event)"
+      (keyup)="emitOnKeyup($event)"
+      class="field"
+      mask="{{ mask }}"
+      thousandSeparator=","
+      [attr.disabled]="isDisabled ? true : null"
+      [attr.readonly]="readOnly ? true : null"
+    />
+    <!-- <ng-container *ngSwitchCase="'inputDate'">
+            <input
+                autocomplete="off"
+                [type]="fieldType"
+                [id]="formCtrlName"
+                [attr.inputmode]="inputMode"
+                [formControlName]="formCtrlName"
+                (focus)="inputFocus = true && !readOnly"
+                (focusout)="inputFocus = false"
+                (click)="emitOnClick($event)"
+                hidden
+                class="field"
+                [attr.disabled]="isDisabled ? true : null"
+                [attr.readonly]="readOnly ? true : null"
+            />
+            <span (click)="emitOnClick($event)" class="dateValue">{{form.get(formCtrlName).value | jalalyDate}}</span>
+        </ng-container> -->
+    <ng-container *ngSwitchCase="'customInput'">
+      <input [formControlName]="formCtrlName" [id]="formCtrlName" (click)="emitOnClick($event)" type="text" hidden />
+      <span (click)="emitOnClick($event)" class="inputValueText">{{ fieldValueText }}</span>
+    </ng-container>
+    <select
+      *ngSwitchCase="'select'"
+      [id]="formCtrlName"
+      [formControlName]="formCtrlName"
+      (focus)="inputFocus = true"
+      (focusout)="inputFocus = false"
+      class="field"
+      (change)="emitOnChange($event)"
+    >
+      <option *ngFor="let item of options" [value]="item.id">
+        {{ item.title }}
+      </option>
+    </select>
+    <textarea
+      *ngSwitchCase="'textarea'"
+      [id]="formCtrlName"
+      [formControlName]="formCtrlName"
+      (focus)="inputFocus = true && !readOnly"
+      (focusout)="inputFocus = false"
+      class="field"
+      rows="1"
+      #textSample
+      (keyup)="textAreaAdjust(textSample)"
+    >
+    </textarea>
+  </ng-container>
+  <small *ngIf="checkValidationStatus(); else elseBlock">{{ handleValidation.msg }}</small>
+  <ng-template #elseBlock>
+    <small *ngIf="helpDesc">{{ helpDesc }}</small>
+  </ng-template>
+
+  <label [for]="formCtrlName">{{ label }}</label>
+</div>

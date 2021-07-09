@@ -1,0 +1,133 @@
+<div class="form">
+  <ng-container [ngSwitch]="currentAction?.name">
+    <ng-container *ngSwitchCase="'signup'">
+      <div class="flex-row jus-between al-center mb-20">
+        <h2 class="form-title">ثبت نام</h2>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'login'">
+      <div class="flex-row jus-between al-center mb-20">
+        <h2 class="form-title">ورود</h2>
+      </div>
+      <p class="text-12 mb-20" *ngIf="form.contains('password')">
+        رمز یکبارمصرف ارسالی به شماره {{ form.value.username }} را وارد کنید
+        <a *ngIf="form.contains('username')" (click)="changeUserName()" style="color: #42b153">ویرایش شماره موبایل</a>
+      </p>
+    </ng-container>
+  </ng-container>
+  <form
+    (ngSubmit)="!form.contains('password') && currentAction?.name != 'signup' ? sendToGetCode() : submit()"
+    [formGroup]="form"
+  >
+    <div class="form-inputs">
+      <form-field
+        *ngIf="form.contains('username') && !form.contains('password')"
+        [form]="form"
+        [formCtrlName]="'username'"
+        [inputMode]="'numeric'"
+        [label]="'شماره موبایل'"
+        [fieldClass]="'ltrField'"
+        [helpDesc]="'شماره موبایل خود را وارد کنید'"
+        [handleValidation]="formErrors.username"
+      >
+      </form-field>
+      <form-field
+        *ngIf="form.contains('password')"
+        [form]="form"
+        [formCtrlName]="'password'"
+        [inputMode]="'numeric'"
+        [label]="'رمز عبور'"
+        [fieldClass]="'ltrField'"
+        [handleValidation]="formErrors.password"
+      >
+      </form-field>
+      <form-field
+        *ngIf="form.contains('firstname') && !form.contains('password')"
+        [form]="form"
+        [formCtrlName]="'firstname'"
+        [label]="'نام'"
+        [handleValidation]="formErrors.firstname"
+      >
+      </form-field>
+      <form-field
+        *ngIf="form.contains('lastname') && !form.contains('password')"
+        [form]="form"
+        [formCtrlName]="'lastname'"
+        [label]="'نام خانوادگی'"
+        [handleValidation]="formErrors.lastname"
+      >
+      </form-field>
+      <form-field
+        *ngIf="form.contains('telephone') && !form.contains('password')"
+        [form]="form"
+        [inputMode]="'numeric'"
+        [formCtrlName]="'telephone'"
+        [label]="'شماره تماس'"
+        [fieldClass]="'ltrField'"
+        [handleValidation]="formErrors.telephone"
+      >
+      </form-field>
+      <div class="flex-row al-center mb-20" *ngIf="currentAction?.name == 'signup'">
+        <switch-toggle
+          [activeToggle]="form.value.IsResidence"
+          (toggleStatus)="ctrlCompanyDetail($event)"
+        ></switch-toggle>
+        <span class="titel text-12" style="margin-right: 10px">مایل به تکمیل اطلاعات حقوقی برای خرید سازمانی هستم</span>
+      </div>
+      <form-field
+        *ngIf="form.contains('confirmcode')"
+        [form]="form"
+        [formCtrlName]="'confirmcode'"
+        [inputMode]="'numeric'"
+        [label]="'کد تائید'"
+        [fieldClass]="'ltrField'"
+        [handleValidation]="formErrors.confirmcode"
+      >
+      </form-field>
+      <form-field
+        *ngIf="form.contains('company_name') && !form.contains('password')"
+        [form]="form"
+        [formCtrlName]="'company_name'"
+        [label]="'نام شرکت'"
+        [handleValidation]="formErrors.company_name"
+      >
+      </form-field>
+      <form-field
+        *ngIf="form.contains('company_telephone') && !form.contains('password')"
+        [form]="form"
+        [inputMode]="'numeric'"
+        [formCtrlName]="'company_telephone'"
+        [label]="'شماره تماس شرکت'"
+        [fieldClass]="'ltrField'"
+        [handleValidation]="formErrors.company_telephone"
+      >
+      </form-field>
+      <form-field
+        *ngIf="form.contains('company_nationalid') && !form.contains('password')"
+        [form]="form"
+        [formCtrlName]="'company_nationalid'"
+        [label]="'شناسه ملی'"
+        [fieldClass]="'ltrField'"
+        [handleValidation]="formErrors.company_nationalid"
+      >
+      </form-field>
+    </div>
+    <ng-container [ngSwitch]="currentAction?.name">
+      <div class="flex-col jus-center al-center" *ngSwitchCase="'login'">
+        <button class="button btn__success wide mb-10" type="submit" *ngIf="!form.contains('password')">
+          دریافت رمز یکبارمصرف
+        </button>
+        <button class="button btn__success wide mb-10" type="submit" *ngIf="form.contains('password')">ورود</button>
+        <p class="text-14 wi-shrink" *ngIf="form.contains('username')">
+          هنوز ثبت‌نام نکرده‌اید؟ <a [routerLink]="['/auth/signup']" style="color: #42b153">ثبت‌نام کنید</a>
+        </p>
+      </div>
+      <div class="flex-col jus-center al-center" *ngSwitchCase="'signup'">
+        <button class="button btn__success wide mb-10" type="submit">ثبت نام</button>
+        <p class="text-14 wi-shrink">
+          قبلا ثبت‌نام کرده‌اید؟ <a [routerLink]="['/auth/login']" style="color: #42b153">وارد شوید</a>
+        </p>
+      </div>
+    </ng-container>
+  </form>
+</div>

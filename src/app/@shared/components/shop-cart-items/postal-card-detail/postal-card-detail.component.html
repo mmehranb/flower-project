@@ -1,0 +1,53 @@
+<modal-template [headerTitle]="'انتخاب کارت پستال رایگان'" [isCentralDialog]="true" [dialogClass]="'large'">
+  <form (ngSubmit)="submit()">
+    <ng-container *ngIf="postalCarts">
+      <swiper class="swiper-container mb-20" fxFlex="auto" [config]="postalCartsConfig">
+        <div
+          class="swiper-slide product"
+          *ngFor="let item of postalCarts"
+          [ngClass]="{ active: form.value.postalcard_id == item.postalcart_id }"
+        >
+          <div class="product-img">
+            <img appLazyLoad [src]="getImageUrl(item.pic)" alt="" />
+          </div>
+          <div class="product-actions">
+            <div class="action" (click)="patchPostalCard(item)">انتخاب</div>
+          </div>
+          <div class="product-title">{{ item?.name }}</div>
+        </div>
+      </swiper>
+    </ng-container>
+    <form-field [form]="form" [field]="'textarea'" [formCtrlName]="'postalcard_text'" [label]="'متن روی کارت پستال'">
+    </form-field>
+    <div class="flex-row mb-30 al-center jus-between">
+      <p>متن پیشنهادی...</p>
+      <button class="button btn__hollow" type="button" *ngIf="!suggestionItems" (click)="showSuggestion()">
+        مشاهده متن های پیشنهادی
+      </button>
+    </div>
+    <ul class="suggestion">
+      <li class="item" *ngFor="let item of suggestionItems">
+        <p class="item-title flex-row jus-between al-center" (click)="item.active = !item.active">
+          <span>
+            {{ item?.name }}
+          </span>
+          <i class="fas fa-chevron-down"></i>
+        </p>
+        <ul [collapse]="!item.active">
+          <li class="child" *ngFor="let child of item.event_text">
+            <special-input
+              [id]="child.id"
+              [name]="'postalcard_text'"
+              [value]="child.description"
+              [label]="child.description"
+              (onChange)="selectSuggestion($event)"
+            ></special-input>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <div class="fixedButton">
+      <button class="button btn__success wide" type="submit">ثبت کارت پستال</button>
+    </div>
+  </form>
+</modal-template>

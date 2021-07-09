@@ -1,0 +1,92 @@
+<ng-container *ngIf="!router.url.startsWith('/checkout') || router.url.startsWith('/checkout/shop-cart')">
+  <div class="headerGap"></div>
+  <header class="header">
+    <div class="header-top row al-center jus-between wi-fit">
+      <div class="flex-row wi-shrink hide-for-large" (click)="showMenu()">
+        <i class="fas fa-bars"></i>
+      </div>
+      <h1 *ngIf="router.url.endsWith('/')">
+        <a class="header-logo" [routerLink]="['/']"
+          ><img appLazyLoad src="assets/images/logo/benis-logo.png" alt="گلفروشی آنلاین بنیس فلاور"
+        /></a>
+      </h1>
+      <a *ngIf="!router.url.endsWith('/')" class="header-logo" [routerLink]="['/']"
+        ><img appLazyLoad src="assets/images/logo/benis-logo.png" alt="گلفروشی آنلاین بنیس فلاور"
+      /></a>
+      <div class="header-search show-for-large">
+        <form (ngSubmit)="search(largeSearch.value)" action="">
+          <label for="search">
+            <input
+              #largeSearch
+              class="search-input"
+              name="search"
+              aria-label="Search"
+              type="text"
+              placeholder="جستجوی نام گل یا گلدان..."
+            />
+          </label>
+          <button type="submit" class="search-icon">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
+      </div>
+      <div class="header-actions wi-shrink jus-end">
+        <div class="action" *ngIf="userInfo" [routerLink]="['/profile/user']">
+          <i class="fas fa-user"></i>
+          <span class="show-for-large">{{ userInfo.firstname }} {{ userInfo.lastname }}</span>
+        </div>
+        <div class="action" *ngIf="userInfo == null" (click)="login()">
+          <i class="fas fa-user"></i>
+          <span class="show-for-large">ورود/ثبت‌نام</span>
+        </div>
+        <div class="action" (click)="showShopCart()">
+          <div *ngIf="shopCartItemNumber" class="shopCartNumber">
+            {{ shopCartItemNumber }}
+          </div>
+          <i class="fas fa-shopping-cart"></i>
+          <span class="show-for-large">سبدخرید</span>
+        </div>
+      </div>
+    </div>
+    <div class="header-bottom row flex-row al-center jus-between wi-shrink">
+      <header-menu class="show-for-large" [useInModal]="false"></header-menu>
+      <div class="header-search hide-for-large">
+        <form (ngSubmit)="search(smallSearch.value)" action="">
+          <label for="search">
+            <input
+              #smallSearch
+              class="search-input"
+              name="search"
+              aria-label="Search"
+              type="text"
+              placeholder="جستجوی نام گل یا گلدان..."
+            />
+          </label>
+          <button type="submit" class="search-icon">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
+      </div>
+      <div class="flex-row text-14 al-center show-for-large">
+        <i class="fas fa-headset"></i>
+        <span style="margin: 0 5px 0 10px">تماس باما:</span>
+        <span class="gray-c">{{ config?.tell }}</span>
+      </div>
+    </div>
+  </header>
+</ng-container>
+<ng-container *ngIf="router.url.startsWith('/checkout') && !router.url.startsWith('/checkout/shop-cart')">
+  <div class="headerGap headerGap__checkout"></div>
+  <header class="header header__checkout">
+    <div class="header-top flex-row al-center jus-between wi-fit">
+      <!-- <a class="wi-fit text-12" [routerLink]="['/checkout/shop-cart']">بازگشت به سبد خرید</a> -->
+      <a class="header-logo wi-fit text-center" [routerLink]="['/']"
+        ><img appLazyLoad src="assets/images/logo/benis-logo.png" alt="benis flower"
+      /></a>
+      <!-- <div class="header-actions wi-fit jus-end al-center">
+        <i class="fas fa-user"></i>
+        <span class="show-for-large text-14">{{userInfo?.firstname}} {{userInfo?.lastname}}</span>
+      </div> -->
+    </div>
+  </header>
+</ng-container>

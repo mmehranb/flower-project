@@ -1,0 +1,11 @@
+.card {
+    &-head {
+        display: flex;
+        border-bottom: 1px solid #e1e1e1;
+        justify-self: start;
+        margin-bottom: 25px;
+        padding: 7px 0;
+        font-size: 14px;
+        color: #777e87;
+    }
+}

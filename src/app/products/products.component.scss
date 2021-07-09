@@ -1,0 +1,19 @@
+.orderFilter {
+    border-bottom: 1px solid #ccc;
+    font-size: 12px;
+    padding: 10px 0;
+    margin-bottom: 15px;
+    overflow-x: auto;
+
+    &-item {
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &.active {
+            background: #42b153;
+            color: white;
+        }
+    }
+}
+

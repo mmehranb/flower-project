@@ -1,0 +1,38 @@
+<section class="container">
+  <div class="row">
+    <div class="columns large-6 small-12 small-order-2 large-order-1">
+      <h2 class="container-title text-center">!همکار ما در بنیس باشید</h2>
+      <form [formGroup]="form">
+        <form-field
+          [form]="form"
+          [formCtrlName]="'name'"
+          [label]="'نام و نام خانوادگی'"
+          [handleValidation]="formErrors?.name"
+        >
+        </form-field>
+        <form-field
+          [form]="form"
+          [formCtrlName]="'tell'"
+          [label]="'شماره تلفن'"
+          [inputMode]="'numeric'"
+          [fieldClass]="'ltrField'"
+          [handleValidation]="formErrors.tell"
+        >
+        </form-field>
+        <form-field
+          [form]="form"
+          [formCtrlName]="'email'"
+          [label]="'ایمیل'"
+          [fieldClass]="'ltrField'"
+          [handleValidation]="formErrors.email"
+        >
+        </form-field>
+        <button class="button btn__success" type="button" (click)="submit()">ارسال درخواست</button>
+      </form>
+    </div>
+    <div class="columns large-6 small-12 text-center small-order-1 large-order-2">
+      <img appLazyLoad class="mb-20" src="assets/images/home/join-us.png" alt="تماس باما" />
+      <p class="text-16">پیغام شما را پاسخ میدهیم!</p>
+    </div>
+  </div>
+</section>

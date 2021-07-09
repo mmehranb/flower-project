@@ -1,0 +1,27 @@
+.container {
+    padding: 100px 0;
+
+    &-title {
+        font-size: 24px;
+        font-weight: 500;
+        margin-bottom: 40px;
+    }
+
+    &__smallPadd {
+        padding: 60px 0;
+    }
+
+    &__fullheight {
+        min-height: calc(100vh - 120px);
+    }
+
+    &__gray {
+        background: #F5F5F5;
+    }
+}
+
+@include breakpoint(medium down) {
+    .container {
+        padding: 60px 0;
+    }
+}

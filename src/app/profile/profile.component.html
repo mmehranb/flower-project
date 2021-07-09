@@ -1,0 +1,16 @@
+<section class="container container__fullheight container__gray">
+  <div class="row">
+    <div class="columns small-12">
+      <div class="flex-row jus-between">
+        <h2 class="container-title">
+          حساب کاربری
+        </h2>
+        <button class="button btn__hollow" (click)="exit()">خروج از حساب کاربری</button>
+      </div>
+      <share-tab [items]="tabItems" (changeActivation)="tabRouteHandler($event)" >
+        <router-outlet></router-outlet>
+      </share-tab>
+      <!-- <router-outlet *ngIf="router.url.startsWith('/profile/orders/detail')"></router-outlet> -->
+    </div>
+  </div>
+</section>

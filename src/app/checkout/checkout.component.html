@@ -1,0 +1,38 @@
+
+<section class="container container__smallPadd container__gray" style="min-height: calc(100vh - 80px);">
+  <checkout-header *ngIf="!router.url.startsWith('/checkout/shop-cart')" [stepNumber]="pageConfig.step"></checkout-header>
+  <div class="row align-center">
+    <div class="columns large-8 small-12 mb-15">
+      <router-outlet (activate)="onActivate($event)"></router-outlet>
+    </div>
+    <div class="columns large-4 small-12" *ngIf="!router.url.startsWith('/checkout/result')">
+      <div class="box">
+        <ul class="factor mb-30">
+          <ng-container *ngIf="factorInfo?.basket.length">
+            <li *ngFor="let item of factorInfo?.basket">
+              <span>{{ item.product_name }}</span>
+              <span>{{ item.calc_price | number: "0.0-0" }} <span class="text-12">تومان</span></span>
+            </li>
+            <hr />
+          </ng-container>
+          <li>
+            <span>تخفیف</span>
+            <span>{{ factorInfo?.main.discount | number: "0.0-0" }} <span class="text-12">تومان</span></span>
+          </li>
+          <li>
+            <span>هزینه ارسال</span>
+            <span>{{ factorInfo?.main.shipping_cost | number: "0.0-0" }} <span class="text-12">تومان</span></span>
+          </li>
+          <hr />
+          <li>
+            <span>جمع کل</span>
+            <span>{{ factorInfo?.main.sum_total | number: "0.0-0" }} <span class="text-12">تومان</span></span>
+          </li>
+        </ul>
+      </div>
+      <div class="box addShopCartAction">
+        <button class="columns button btn__success wide" (click)="next()">ادامه فرایند خرید</button>
+      </div>
+    </div>
+  </div>
+</section>

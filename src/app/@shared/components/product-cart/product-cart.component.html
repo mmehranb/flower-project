@@ -1,0 +1,62 @@
+<div class="product" [ngClass]="{ empty: !productInfo?.quantity }">
+  <div class="product-img">
+    <a *ngIf="!onlyAddAction" [routerLink]="['/product/' + productInfo?.cleanurl + '/' + productInfo?.product_id]">
+      <img appLazyLoad [src]="getImageUrl('products/' + productInfo.image)" [alt]="productInfo?.name" />
+    </a>
+    <img
+      appLazyLoad
+      *ngIf="onlyAddAction"
+      (click)="addItemToBasket(productInfo)"
+      [src]="getImageUrl('products/' + productInfo.image)"
+      [alt]="productInfo?.name"
+    />
+    <div class="product-actions">
+      <a
+        class="action"
+        *ngIf="!onlyAddAction"
+        [routerLink]="['/product/' + productInfo?.cleanurl + '/' + productInfo?.product_id]"
+      >
+        <i class="fontIcon far fa-eye"></i>
+      </a>
+      <div
+        class="action"
+        *ngIf="!onlyAddAction"
+        (click)="ctrlItemInWishList(productInfo?.product_id, productInfo.is_whishlist)"
+      >
+        <i class="fontIcon far fa-heart" *ngIf="!productInfo.is_whishlist"></i>
+        <i
+          class="fontIcon fas fa-heart"
+          [ngClass]="{ active: productInfo.is_whishlist }"
+          *ngIf="productInfo.is_whishlist"
+        ></i>
+      </div>
+      <div class="action" (click)="addItemToBasket(productInfo)" *ngIf="productInfo?.quantity">
+        <i class="fontIcon fas fa-shopping-basket"></i>
+      </div>
+    </div>
+    <div class="product-discount" *ngIf="productInfo?.discount_percentage" dir="ltr">
+      %{{ productInfo?.discount_percentage }}
+    </div>
+  </div>
+  <div class="product-title">
+    <a [routerLink]="['/product/' + productInfo?.cleanurl + '/' + productInfo?.product_id]">
+      {{ productInfo?.name }}
+    </a>
+  </div>
+  <ng-container *ngIf="!productInfo?.quantity">
+    <div class="product-price">ناموجود!</div>
+  </ng-container>
+  <ng-container *ngIf="productInfo?.quantity">
+    <div class="product-price" *ngIf="!productInfo?.discount_percentage">
+      <a [routerLink]="['/product/' + productInfo?.cleanurl + '/' + productInfo?.product_id]">
+        <p>{{ productInfo.calc_price || productInfo.price | number: "0.0-0" }} <span class="text-12">تومان</span></p>
+      </a>
+    </div>
+    <div class="product-price special" *ngIf="productInfo?.discount_percentage">
+      <a [routerLink]="['/product/' + productInfo?.cleanurl + '/' + productInfo?.product_id]">
+        <p class="lastPrice">{{ productInfo.oldprice | number: "0.0-0" }} <span class="text-12">تومان</span></p>
+        <p>{{ productInfo.calc_price || productInfo.price | number: "0.0-0" }} <span class="text-12">تومان</span></p>
+      </a>
+    </div>
+  </ng-container>
+</div>

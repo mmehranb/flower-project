@@ -1,0 +1,15 @@
+.map-container {
+  height: calc(90vh - 170px);
+  max-height: 500px;
+
+
+}
+
+.map-frame {
+  border: 2px solid black;
+  width: 100%;
+}
+
+#map {
+  height: 100%;
+}

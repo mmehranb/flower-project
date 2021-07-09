@@ -1,0 +1,88 @@
+<div class="filter" *ngIf="!useInModal">
+  <div class="filter-box mb-15">
+    <div class="box-header">محصولات</div>
+    <div class="box-inputs">
+      <check-box
+        *ngFor="let item of categoryFilterTypeItems"
+        [id]="'cat' + item.id"
+        [defaultValue]="item.value"
+        [label]="item?.name"
+        (isChange)="item.value = $event; filterChange('categories_id')"
+      >
+      </check-box>
+    </div>
+  </div>
+  <div class="filter-box mb-15">
+    <div class="box-header">محدوده قیمت</div>
+    <div class="box-inputs">
+      <special-input
+        *ngFor="let item of priceFilterTypeItems"
+        [id]="'price' + item.id"
+        [name]="'priceRange'"
+        [value]="item.id"
+        [defaultValue]="item.value"
+        [label]="item?.name"
+        (onChange)="item.value = $event; filterChange('price')"
+      ></special-input>
+    </div>
+  </div>
+  <div class="filter-box mb-15" *ngFor="let item of productFilterTypeItems">
+    <div class="box-header">{{ item?.name }}</div>
+    <div class="box-inputs">
+      <check-box
+        *ngFor="let input of item.values"
+        [id]="input.option_value_id"
+        [defaultValue]="input.value"
+        [label]="input?.name"
+        (isChange)="input.value = $event; filterChange('option')"
+      >
+      </check-box>
+    </div>
+  </div>
+</div>
+<ng-container *ngIf="useInModal">
+  <modal-template [headerTitle]="'فیلتر پیشرفته'" [isCentralDialog]="true">
+    <div class="filter-box mb-15">
+      <div class="box-header">محصولات</div>
+      <div class="box-inputs">
+        <check-box
+          *ngFor="let item of categoryFilterTypeItems"
+          [id]="'cat' + item.id"
+          [defaultValue]="item.value"
+          [label]="item?.name"
+          (isChange)="item.value = $event; filterChange('categories_id')"
+        >
+        </check-box>
+      </div>
+    </div>
+    <div class="filter-box mb-15">
+      <div class="box-header">محدوده قیمت</div>
+      <div class="box-inputs">
+        <special-input
+          *ngFor="let item of priceFilterTypeItems"
+          [id]="'price' + item.id"
+          [name]="'priceRange'"
+          [value]="item.id"
+          [defaultValue]="item.value"
+          [label]="item?.name"
+          (onChange)="item.value = $event; filterChange('price')"
+        ></special-input>
+      </div>
+    </div>
+    <div class="filter">
+      <div class="filter-box mb-15" *ngFor="let item of productFilterTypeItems">
+        <div class="box-header">{{ item?.name }}</div>
+        <div class="box-inputs">
+          <check-box
+            *ngFor="let input of item.values"
+            [id]="input.option_value_id"
+            [defaultValue]="input.value"
+            [label]="input?.name"
+            (isChange)="input.value = $event; filterChange('option')"
+          >
+          </check-box>
+        </div>
+      </div>
+    </div>
+  </modal-template>
+</ng-container>

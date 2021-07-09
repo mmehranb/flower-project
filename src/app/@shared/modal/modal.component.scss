@@ -1,0 +1,74 @@
+@import "node_modules/foundation-sites/scss/foundation";
+@include foundation-responsive-embed;
+
+.template {
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 0 20px 20px;
+  max-width: 400px;
+
+  .template-head {
+    display: flex;
+    align-items: center;
+    height: 65px;
+
+    .head-title {
+      font-size: 20px;
+      font-weight: 500;
+      color: #000;
+      margin: 0;
+    }
+
+    .heade-close {
+      color: #f7a700;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      height: auto;
+    }
+  }
+
+  .template-content {
+    overflow: auto;
+    padding-top: 20px;
+    margin-right: -20px;
+    padding-right: 20px;
+
+    .content-desc {
+      font-size: 14px;
+      font-weight: 300;
+      font-style: normal;
+      text-align: right;
+      color: #000;
+      margin: 0 0 16px;
+    }
+  }
+
+  &-close {
+    position: absolute;
+
+    .closeButton {
+      width: 46px;
+      height: 46px;
+      box-shadow: 10px 10px 43px 0 rgba(255, 93, 108, 0.6), inset 10px 11px 13px 0 #e4e4e4;
+      background-color: #fff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;  
+    }
+  }
+
+  &.large {
+    max-width: 600px;
+  }
+
+  @include breakpoint(medium down) {
+    padding: 0 10px 20px;
+
+    .template-content {
+      margin-right: -10px;
+      padding-right: 10px;
+    }
+  }
+}

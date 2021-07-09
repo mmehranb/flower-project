@@ -1,0 +1,96 @@
+<section class="container">
+  <div class="row">
+    <div class="columns large-3 show-for-large">
+      <products-filter
+        [defaultValue]="queryParams"
+        [useInModal]="false"
+        (onFilterChange)="initFilter($event['params'], $event['type'])"
+      ></products-filter>
+    </div>
+    <div class="columns">
+      <div class="flex-row jus-between al-center mb-15">
+        <h1 class="container-title mb-0">
+          {{ productsConfig?.name || headTitle }}
+        </h1>
+        <span class="text-12 gray-c">{{ productsConfig.total }} مورد یافت شد</span>
+      </div>
+      <div class="orderFilter flex-row al-center">
+        <div style="margin-left: 15px">مرتب‌سازی:</div>
+        <div
+          class="orderFilter-item"
+          [ngClass]="{ active: sortbyFilter == null }"
+          (click)="initFilter({ sortby: null }, 'sortby')"
+        >
+          پیش فرض
+        </div>
+        <div
+          class="orderFilter-item"
+          [ngClass]="{ active: sortbyFilter == 101 }"
+          (click)="initFilter({ sortby: 101 }, 'sortby')"
+        >
+          جدیدترین
+        </div>
+        <div
+          class="orderFilter-item"
+          [ngClass]="{ active: sortbyFilter == 102 }"
+          (click)="initFilter({ sortby: 102 }, 'sortby')"
+        >
+          پرفروش‌ترین
+        </div>
+        <div
+          class="orderFilter-item"
+          [ngClass]="{ active: sortbyFilter == 103 }"
+          (click)="initFilter({ sortby: 103 }, 'sortby')"
+        >
+          ارزان‌ترین
+        </div>
+        <div
+          class="orderFilter-item"
+          [ngClass]="{ active: sortbyFilter == 104 }"
+          (click)="initFilter({ sortby: 104 }, 'sortby')"
+        >
+          گران‌ترین
+        </div>
+      </div>
+      <div class="hide-for-large mb-15">
+        <button class="button btn__success wide" (click)="modalFilter()">فیلتر پیشرفته</button>
+      </div>
+      <ng-container *ngIf="productsItem.length">
+        <div class="row large-up-4 medium-up-3 small-up-2 half-gutter" @list>
+          <div
+            class="columns mb-30"
+            @items
+            *ngFor="
+              let item of productsItem
+                | paginate
+                  : {
+                      itemsPerPage: productsConfig.per_page,
+                      totalItems: productsConfig.total,
+                      currentPage: this.currentPage
+                    }
+            "
+          >
+            <product-cart [productInfo]="item"></product-cart>
+          </div>
+        </div>
+        <pagination-controls
+          previousLabel=""
+          nextLabel=""
+          (pageChange)="currentPage = $event; initFilter({ page: $event }, 'page')"
+        ></pagination-controls>
+      </ng-container>
+      <ng-container *ngIf="productsItem && !productsItem.length">
+        <div class="box box__warning">
+          <p class="text-14">جستجو برای این ترکیب از فیلترها با هیچ کالایی هم‌خوانی نداشت.</p>
+        </div>
+      </ng-container>
+    </div>
+    <div class="columns small-12">
+      <div
+        style="font-size: 12px; margin-top: 20px"
+        *ngIf="productsConfig.description"
+        [innerHTML]="productsConfig.description | safeHtml"
+      ></div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,27 @@
+<div class="box mb-20">
+  <h2 class="box-title">اطلاعات پرداخت</h2>
+  <div>
+    <h3 class="text-16 mb-10">کد تخفیف</h3>
+    <div class="flex-row">
+      <form-field [form]="form" [formCtrlName]="'coupon_name'" [label]="'کد تخفیف'"> </form-field>
+      <button class="button btn__success" style="margin-right: 10px" (click)="checkDiscount()">اعمال کد تخفیف</button>
+    </div>
+  </div>
+  <div>
+    <h3 class="text-16 mb-15">درگاه بانکی</h3>
+    <div class="flex-row">
+      <div
+        class="ipg"
+        style="margin: 0 5px"
+        *ngFor="let type of ipgTypes"
+        (click)="chooseIpgType(type.payment_method_id)"
+        [ngClass]="{ active: type.payment_method_id == form.value.payment_method_id }"
+      >
+        <div class="mb-10" style="width: 50px; height: 50px; margin: 0 auto">
+          <img appLazyLoad [src]="type.picurl" alt="" />
+        </div>
+        <span class="text-12">{{ type?.name }}</span>
+      </div>
+    </div>
+  </div>
+</div>

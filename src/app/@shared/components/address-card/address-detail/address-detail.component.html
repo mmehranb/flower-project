@@ -1,0 +1,82 @@
+<modal-template [headerTitle]="'اطلاعات آدرس گیرنده'" [isCentralDialog]="true">
+  <div class="map-container flex-col" *ngIf="!acceptedMap">
+    <div class="map-frame mb-15 wi-fit">
+      <div id="map"></div>
+    </div>
+    <button class="button btn__success wide wi-shrink" (click)="pickMap()">انتخاب مکان جغرافیایی</button>
+  </div>
+  <form (ngSubmit)="submit()" *ngIf="acceptedMap" [formGroup]="form">
+    <form-field [form]="form" [formCtrlName]="'title'" [label]="'عنوان'" [handleValidation]="formErrors.title">
+    </form-field>
+    <form-field [form]="form" [formCtrlName]="'firstname'" [label]="'نام'" [handleValidation]="formErrors.firstname">
+    </form-field>
+    <form-field
+      [form]="form"
+      [formCtrlName]="'lastname'"
+      [label]="'نام خانوادگی'"
+      [handleValidation]="formErrors.lastname"
+    >
+    </form-field>
+    <form-field
+      [form]="form"
+      [formCtrlName]="'telephone'"
+      [inputMode]="'numeric'"
+      [label]="'شماره تماس'"
+      [fieldClass]="'ltrField'"
+      [handleValidation]="formErrors.telephone"
+    >
+    </form-field>
+    <form-field
+      [form]="form"
+      [field]="'select'"
+      [options]="statesItems"
+      [formCtrlName]="'zone_id'"
+      [label]="'استان'"
+      [handleValidation]="formErrors.zone_id"
+      (onChange)="ctrlPostCodeValidation()"
+    >
+    </form-field>
+    <form-field
+      [form]="form"
+      [formCtrlName]="'unit'"
+      [label]="'واحد'"
+      [fieldClass]="'ltrField'"
+      [handleValidation]="formErrors.unit"
+    >
+    </form-field>
+    <form-field
+      [form]="form"
+      [formCtrlName]="'plaque'"
+      [inputMode]="'numeric'"
+      [label]="'پلاک'"
+      [fieldClass]="'ltrField'"
+      [handleValidation]="formErrors.plaque"
+    >
+    </form-field>
+    <form-field
+      [form]="form"
+      [formCtrlName]="'postcode'"
+      [inputMode]="'numeric'"
+      [label]="'کدپستی'"
+      [fieldClass]="'ltrField'"
+      [handleValidation]="formErrors.postcode"
+    >
+    </form-field>
+    <form-field
+      [form]="form"
+      [field]="'textarea'"
+      [formCtrlName]="'address_1'"
+      [label]="'آدرس'"
+      [handleValidation]="formErrors.address_1"
+    >
+    </form-field>
+    <div class="text-14 mb-10" (click)="acceptedMap = false; initMap()">مشاهده مکان جغرافیایی</div>
+    <label class="mb-15 text-14 flex-row al-center" for="isdefault">
+      <input type="checkbox" id="isdefault" [formControl]="form.controls['isdefault']" style="margin-left: 5px" />
+      انتخاب به عنوان آدرس پیش فرض
+    </label>
+    <div class="fixedButton">
+      <button class="button btn__success wide" type="submit">ثبت</button>
+    </div>
+  </form>
+</modal-template>

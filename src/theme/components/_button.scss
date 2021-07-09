@@ -1,0 +1,45 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 4px;
+    font-size: 12px;
+    padding: 0 20px;
+    outline: 0;
+    cursor: pointer;
+    min-width: 80px;
+
+    &.btn__success {
+        color: white;
+        border-radius: 7px;
+        background: #42B153;
+    }
+
+    &.btn__hollow {
+        color: #42b153;
+        background-color: transparent;
+        border: 1px solid #42b153;
+        border-radius: 20px;
+    }
+
+    &.btn__delete {
+        border: 1px solid #FF0000;
+        color: #FF0000;
+        background: rgb(255 0 0 / 0.05);
+    }
+
+    &.wide {
+        width: 100%;
+    }
+
+    &.hi-40 {
+        height: 40px;
+    }
+
+    &:disabled {
+      background-color: #777E87;
+      border: 1px solid #777E87;
+      color: white;
+    }
+}

@@ -1,0 +1,41 @@
+@import "./mixins";
+@import "./variables";
+@import "./general";
+
+//Font
+@import "./font";
+@import '~ngx-toastr/toastr';
+@import "~leaflet/dist/leaflet.css";
+
+//Foundation
+@import "./settings";
+@import "node_modules/foundation-sites/scss/foundation";
+@include foundation-global-styles;
+@include foundation-typography;
+@include foundation-flex-grid;
+@include foundation-table;
+@include foundation-responsive-embed;
+@include foundation-flex-classes;
+@include foundation-visibility-classes;
+
+//Override
+@import "./override/gotter-row";
+@import "./override/swiper";
+@import "./override/pagination";
+@import "./override/toastr";
+@import "./override/table";
+@import "./override/count-down";
+
+//Component
+@import "./components/container";
+@import "./components/grid";
+@import "./components/button";
+@import "./components/box";
+@import "./components/modal";
+@import "./components/card";
+
+/*call mixins*/
+@include emergency-margin($margins);
+@include emergency-color($color-list);
+@include emergency-fontSize($fonts);
+@include flex-widths($widths)

@@ -1,0 +1,66 @@
+<div class="box mb-30">
+  <form [formGroup]="form">
+    <div class="row large-up-2 small-up-1">
+      <div class="columns">
+        <form-field
+          [form]="form"
+          [formCtrlName]="'name'"
+          [label]="'این روز خاص برای کیست'"
+          [handleValidation]="formErrors?.name"
+        >
+        </form-field>
+      </div>
+      <div class="columns">
+        <form-field
+          (click)="showEventItems()"
+          [readOnly]="true"
+          [form]="form"
+          [formCtrlName]="'eventid'"
+          [field]="'customInput'"
+          [fieldValueText]="selectedEvent"
+          [label]="'مناسبت'"
+          [handleValidation]="formErrors.eventid"
+        >
+        </form-field>
+      </div>
+      <div class="columns">
+        <dp-date-picker
+          [config]="datePickerConfig"
+          theme="dp-material"
+          [form]="form"
+          [formCtrlName]="'date'"
+          [handleValidation]="formErrors.date"
+        ></dp-date-picker>
+      </div>
+    </div>
+    <button class="button btn__success" type="button" (click)="submit()">ثبت تقویم</button>
+  </form>
+</div>
+
+<div class="card">
+  <p class="card-head">تقویم شخصی</p>
+  <div class="row large-up-2 small-up-1">
+    <div class="columns" *ngFor="let item of reminderItems">
+      <div class="box">
+        <ul class="reminderInfo flex-row jus-between wrapped">
+          <li>
+            <span>این روز خاص برای:</span>
+            <span>{{ item?.name }}</span>
+          </li>
+          <li>
+            <span>تاریخ:</span>
+            <span>{{ item.event_month }}/{{ item.event_day }} هرسال</span>
+          </li>
+          <li>
+            <span>مناسبت:</span>
+            <span>{{ item.event_name }}</span>
+          </li>
+        </ul>
+        <div class="flex-row">
+          <button class="button btn__delete wi-fit" (click)="deleteReminder(item.customer_event_id)">حذف</button>
+          <button class="button btn__hollow wi-fit" style="border-radius: 4px; margin-right: 15px">ویرایش</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="update" *ngIf="showUpdateBtn">
+  <div class="update-box">
+    <h3>ورژن جدید بنیس فلاور</h3>
+    <p>
+      برای استفاده از امکانات جدید بنیس فلاور لطفا صفحه خود را رفرش کنید یا روی دکمه زیر کلیک کنید تا نسخه جدید را دریافت کنید
+    </p>
+    <button class="button btn__success" (click)="onUpdate()">بازنشانی برنامه</button>
+  </div>
+</div>
+<router-outlet></router-outlet>
+<app-loader></app-loader>
+

@@ -1,0 +1,62 @@
+.orderSteps {
+  display: flex;
+  overflow-x: auto;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+
+  .step {
+    flex: 0 0 auto;
+    margin: 0 15px;
+    text-align: center;
+    opacity: 0.4;
+
+    &-img {
+      margin-bottom: 15px;
+    }
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      text-align: center;
+    }
+  }
+
+  .line {
+    opacity: 0.4;
+    flex: 0 0 auto;
+    max-width: 170px;
+  }
+
+  .active {
+    opacity: 1 !important;
+  }
+}
+
+.detail {
+  font-size: 14px;
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+
+    li {
+      flex: 0 0 50%;
+      margin-bottom: 10px;
+
+      .title {
+        color: #999;
+      }
+      .ans {
+        color: #333;
+      }
+    }
+  }
+}
+
+.factor {
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+  }
+}
